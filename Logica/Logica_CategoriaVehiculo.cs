@@ -45,6 +45,10 @@ namespace Logica
                 throw new Exception("Error al registrar la categoría de vehículo: " + ex.Message);
             }
         }
+        public int ObtenerSiguienteId()
+        {
+            return datosCategoria.ObtenerSiguienteId();
+        }
 
         //consultar todas las categorías de vehículos
         public List<Entidades.CategoriaVehiculo> ConsultarCategorias()

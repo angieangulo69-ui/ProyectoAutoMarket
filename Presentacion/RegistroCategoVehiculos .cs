@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Logica;
 
 
 namespace Presentacion
@@ -17,6 +18,7 @@ namespace Presentacion
         public RegistroCategoVehiculos()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen; // Centrar la ventana al abrir
         }
 
         private void btn_registrar_Click(object sender, EventArgs e)
@@ -30,23 +32,26 @@ namespace Presentacion
                     MessageBox.Show("Debe completar todos los campos.");
                     return;
                 }
+                // Crear objeto de lógica para interactuar con la capa de negocio****
+                Logica_CategoriaVehiculo logica = new Logica_CategoriaVehiculo();
+
+                // Obtener ID desde la BD (NO usar contador)
+                int nuevoId = logica.ObtenerSiguienteId();
 
                 // Crear objeto
                 CategoriaVehiculo nueva = new CategoriaVehiculo(
-                   
+
                     txt_nombre.Text.Trim(),
                     txt_descripcion.Text.Trim()
                 );
 
-                
-              Logica_CategoriaVehiculo logica = new Logica_CategoriaVehiculo();
-
+                nueva.IdCategoria = nuevoId;
                 logica.RegistrarCategoria(nueva);
 
                 CargarGrid_Categorias();
                 LimpiarCampos();
 
-                txt_idcategoria.Text = CategoriaVehiculo.ObtenerSiguienteId().ToString();
+                txt_idcategoria.Text = logica.ObtenerSiguienteId().ToString();
 
                 MessageBox.Show("Categoría registrada correctamente.");
             }
@@ -62,7 +67,7 @@ namespace Presentacion
             {
                 Logica_CategoriaVehiculo logica = new Logica_CategoriaVehiculo();
 
-                var lista = logica.ObtenerCategorias();
+                var lista = logica.ConsultarCategorias();
 
                 data_categoriavehiculos.Rows.Clear();
 
@@ -90,10 +95,7 @@ namespace Presentacion
         }
         private void data_categoriavehiculos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            ConfigurarGrid();
-            txt_nombre.ReadOnly = true;
-            txt_nombre.Text = CategoriaVehiculo.ObtenerSiguienteId().ToString();
-            CargarGrid_Categorias();
+
         }
         private void LimpiarCampos()
         { // Limpiar los campos de texto después de guardar
@@ -103,6 +105,28 @@ namespace Presentacion
             txt_nombre.Focus(); // Establecer el foco en el campo de categoría para facilitar la entrada de datos
         }
 
+        private void RegistroCategoVehiculos_Load(object sender, EventArgs e)
+        {
+            ConfigurarGrid();
+            // Obtener el siguiente ID para mostrarlo en el campo de texto
+            Logica_CategoriaVehiculo logica = new Logica_CategoriaVehiculo();
+            txt_idcategoria.Text = logica.ObtenerSiguienteId().ToString();
+
+            CargarGrid_Categorias();
+        }
+
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+               Application.Exit();
+        }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            //Llamo a la ventana de registro
+            MenuRegistros Registros = new MenuRegistros();
+            Registros.Show();
+            Close(); //Cierra la ventana actual
+        }
     }
 
 }

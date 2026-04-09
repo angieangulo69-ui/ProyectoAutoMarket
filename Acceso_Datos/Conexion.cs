@@ -10,10 +10,22 @@ namespace Acceso_Datos
 {
     public class Conexion
     {
-        private string cadenaConexion = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
-            public SqlConnection ObtenerConexion()
-            {
-                return new SqlConnection(cadenaConexion);
+        private string cadenaConexion;
+
+        public Conexion()
+        {
+            var conn = ConfigurationManager.ConnectionStrings["conexion"];
+
+            if (conn == null)
+                throw new Exception("No se encontró la cadena de conexión en App.config");
+
+            cadenaConexion = conn.ConnectionString;
+        }
+
+        public SqlConnection ObtenerConexion()
+        {
+            return new SqlConnection(cadenaConexion);
         }
     }
 }
+

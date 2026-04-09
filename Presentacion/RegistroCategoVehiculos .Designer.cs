@@ -37,6 +37,9 @@
             txt_nombre = new TextBox();
             txt_descripcion = new TextBox();
             data_categoriavehiculos = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Descripción = new DataGridViewTextBoxColumn();
             btn_registrar = new Button();
             label4 = new Label();
             txt_idcategoria = new TextBox();
@@ -77,6 +80,7 @@
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 10;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
             // 
             // btn_salir
             // 
@@ -88,6 +92,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 13;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label3
             // 
@@ -119,13 +124,35 @@
             // 
             data_categoriavehiculos.BackgroundColor = Color.Black;
             data_categoriavehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            data_categoriavehiculos.Columns.AddRange(new DataGridViewColumn[] { Id, Nombre, Descripción });
             data_categoriavehiculos.GridColor = SystemColors.HighlightText;
-            data_categoriavehiculos.Location = new Point(393, 99);
+            data_categoriavehiculos.Location = new Point(361, 107);
             data_categoriavehiculos.Name = "data_categoriavehiculos";
             data_categoriavehiculos.RowHeadersWidth = 51;
-            data_categoriavehiculos.Size = new Size(300, 188);
+            data_categoriavehiculos.Size = new Size(395, 188);
             data_categoriavehiculos.TabIndex = 17;
             data_categoriavehiculos.CellContentClick += data_categoriavehiculos_CellContentClick;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Id Categoría";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.Width = 125;
+            // 
+            // Nombre
+            // 
+            Nombre.HeaderText = "Nombre";
+            Nombre.MinimumWidth = 6;
+            Nombre.Name = "Nombre";
+            Nombre.Width = 125;
+            // 
+            // Descripción
+            // 
+            Descripción.HeaderText = "Descripción";
+            Descripción.MinimumWidth = 6;
+            Descripción.Name = "Descripción";
+            Descripción.Width = 125;
             // 
             // btn_registrar
             // 
@@ -180,6 +207,7 @@
             Controls.Add(btn_atras);
             Name = "RegistroCategoVehiculos";
             Text = "RegistroCategoVehiculos";
+            Load += RegistroCategoVehiculos_Load;
             ((System.ComponentModel.ISupportInitialize)data_categoriavehiculos).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -198,5 +226,8 @@
         private Button btn_registrar;
         private Label label4;
         private TextBox txt_idcategoria;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Descripción;
     }
 }

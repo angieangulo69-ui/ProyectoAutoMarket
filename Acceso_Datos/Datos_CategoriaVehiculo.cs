@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
@@ -22,7 +23,7 @@ namespace Acceso_Datos
                 {
                     conn.Open();
                     //query 
-                    string query = "INSERT INTO CategoriaVehiculo (IdIdCategoria,NombreCategoria,Descripcion) VALUES (@Id,@Nombre,@Descripcion)";
+                    string query = "INSERT INTO CategoriaVehiculo (IdCategoria,NombreCategoria,Descripcion) VALUES (@Id,@Nombre,@Descripcion)";
 
                     using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
                     {
@@ -71,6 +72,25 @@ namespace Acceso_Datos
                 throw new Exception("Error al obtener categorías: " + ex.Message);
             }
             return listacategorias;
+        }
+        // Método para obtener el siguiente ID disponible para una nueva categoría de vehículo
+        public int ObtenerSiguienteId()
+        {
+            int siguienteId = 1;
+
+            using (var conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+
+                string query = "SELECT ISNULL(MAX(IdCategoria),0) + 1 FROM CategoriaVehiculo";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    siguienteId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+
+            return siguienteId;
         }
     }
 }
