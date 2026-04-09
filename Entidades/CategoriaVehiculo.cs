@@ -25,13 +25,25 @@ namespace Entidades
             public string NombreCategoria { get; set; }
             public string Descripcion { get; set; }
 
-            public CategoriaVehiculo(string nombre, string descripcion)
+        //Constructor de la clase
+        public CategoriaVehiculo(int id,string nombre, string descripcion)
             {
                 //Constructor de la clase
                 IdCategoria = contadorId++;
                 NombreCategoria = nombre;
                 Descripcion = descripcion;
             }
+        //sobrecarga del constructor para no tener que pasar el id al crear una nueva categoría, el id se asigna automáticamente
+        public CategoriaVehiculo(string nombre, string descripcion)
+        { 
+                IdCategoria = contadorId++;
+                NombreCategoria = nombre;
+                Descripcion = descripcion;
+        }
+           public static int ObtenerSiguienteId()
+           { 
+                return contadorId;
+        }
 
             public override string ToString()
             {
