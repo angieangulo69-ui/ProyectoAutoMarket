@@ -17,10 +17,11 @@ namespace Entidades
 {
     public class Sucursal
     {
-        private static int idcontador = 1; //ID automatico
+        private int id;
+        private int idVendedorEncargado;
 
         //Propiedades de la clase Sucursal
-        public int IdSucursal { get; private set; }
+        public int IdSucursal { get; set; }
 
         public string Nombre { get; set; }
         public string Direccion { get; set; }
@@ -32,24 +33,28 @@ namespace Entidades
         //Constructor de la clase Sucursal para inicializar las propiedades
         public Sucursal(string nombre, string direccion, string telefono, Vendedor vendedorEncargado, bool activo)
         {
-            if (string.IsNullOrWhiteSpace(nombre))
-                throw new ArgumentException("El nombre de la sucursal es obligatorio.");
-            IdSucursal = idcontador++;
-
             Nombre = nombre;
             Direccion = direccion;
             Telefono = telefono;
             VendedorEncargado = vendedorEncargado;
             Activo = activo;
         }
+
+        public Sucursal(int id, string? nombre, string? direccion, string? telefono, int idVendedorEncargado, bool activo)
+        {
+            this.id = id;
+            Nombre = nombre;
+            Direccion = direccion;
+            Telefono = telefono;
+            this.idVendedorEncargado = idVendedorEncargado;
+            Activo = activo;
+        }
+
         public override string ToString()
         {
             return Nombre;
         }
-        public static int ObtenerSiguienteId()
-        {
-            return idcontador;
-        }
+       
 
 
     }

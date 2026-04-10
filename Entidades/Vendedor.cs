@@ -17,6 +17,7 @@ namespace Entidades
     public class Vendedor : Persona
     {
         //Atributos
+        public int IdVendedor { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Telefono { get; set; }
@@ -28,6 +29,14 @@ namespace Entidades
             FechaIngreso = fechaIngreso;
             Telefono = telefono;
             FechaNacimiento = fechaNacimiento;
+        }
+            public Vendedor(int idVendedor, string identificacion, string nombre, DateTime fechaNacimiento, DateTime fechaIngreso, string telefono)
+            : base(identificacion, nombre)
+            {
+                IdVendedor = idVendedor;
+                FechaIngreso = fechaIngreso;
+                Telefono = telefono;
+                FechaNacimiento = fechaNacimiento;
         }
         // Sobrescribe el método ToString para mostrar el nombre completo del vendedor junto con su rol
         public override string ToString()

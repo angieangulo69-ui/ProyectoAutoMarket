@@ -45,5 +45,37 @@ namespace Presentacion
             RegistroClientes.Show();
             this.Close(); //Cierra la ventana actual
         }
+
+        private void btn_vendedor_Click(object sender, EventArgs e)
+        {
+            // Llamo a la ventana de  Registrar de vehiculos
+            Registro_Vendedor Registro_Vendedores = new Registro_Vendedor();
+            Registro_Vendedores.Show();
+            this.Close(); //Cierra la ventana actual
+        }
+
+        private void btn_sucursal_Click(object sender, EventArgs e)
+        {
+            // Llamo a la ventana de  Registrarde sucursales
+            RegistroSucursal Registrar_Sucursales = new RegistroSucursal();
+            Registrar_Sucursales.Show();
+            this.Close(); //Cierra la ventana actual
+        }
+
+        private void btn_vehiculo_Click(object sender, EventArgs e)
+        {
+            //Llamo a la ventana de Registrar de vehiculos
+            RegistroVehiculo Registro_Vehiculos = new RegistroVehiculo();
+            Registro_Vehiculos.Show();
+            this.Close(); //Cierra la ventana actual
+        }
+
+        private void btn_vehiculosucursal_Click(object sender, EventArgs e)
+        {
+            // Llamo a la ventana de  Registrar de sucursales
+            Vehiculo_Sucursal Registrar_Vehiculo_Sucursal = new Vehiculo_Sucursal();
+            Registrar_Vehiculo_Sucursal.Show();
+            this.Close(); //Cierra la ventana actual
+        }
     }
 }

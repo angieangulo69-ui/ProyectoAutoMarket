@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuRegistros));
             btn_atras = new Button();
             btn_salir = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            btn_sucursal = new Button();
+            btn_vendedor = new Button();
             btn_cliente = new Button();
-            button7 = new Button();
-            button8 = new Button();
+            btn_vehiculosucursal = new Button();
+            btn_vehiculo = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -70,21 +70,27 @@
             btn_salir.UseVisualStyleBackColor = false;
             btn_salir.Click += btn_salir_Click;
             // 
-            // button4
+            // btn_sucursal
             // 
-            button4.Location = new Point(519, 118);
-            button4.Name = "button4";
-            button4.Size = new Size(74, 70);
-            button4.TabIndex = 3;
-            button4.UseVisualStyleBackColor = true;
+            btn_sucursal.BackgroundImage = (Image)resources.GetObject("btn_sucursal.BackgroundImage");
+            btn_sucursal.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_sucursal.Location = new Point(519, 118);
+            btn_sucursal.Name = "btn_sucursal";
+            btn_sucursal.Size = new Size(74, 70);
+            btn_sucursal.TabIndex = 3;
+            btn_sucursal.UseVisualStyleBackColor = true;
+            btn_sucursal.Click += btn_sucursal_Click;
             // 
-            // button5
+            // btn_vendedor
             // 
-            button5.Location = new Point(130, 290);
-            button5.Name = "button5";
-            button5.Size = new Size(74, 70);
-            button5.TabIndex = 4;
-            button5.UseVisualStyleBackColor = true;
+            btn_vendedor.BackgroundImage = (Image)resources.GetObject("btn_vendedor.BackgroundImage");
+            btn_vendedor.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_vendedor.Location = new Point(130, 290);
+            btn_vendedor.Name = "btn_vendedor";
+            btn_vendedor.Size = new Size(74, 70);
+            btn_vendedor.TabIndex = 4;
+            btn_vendedor.UseVisualStyleBackColor = true;
+            btn_vendedor.Click += btn_vendedor_Click;
             // 
             // btn_cliente
             // 
@@ -98,21 +104,27 @@
             btn_cliente.UseVisualStyleBackColor = false;
             btn_cliente.Click += btn_cliente_Click;
             // 
-            // button7
+            // btn_vehiculosucursal
             // 
-            button7.Location = new Point(519, 287);
-            button7.Name = "button7";
-            button7.Size = new Size(74, 70);
-            button7.TabIndex = 6;
-            button7.UseVisualStyleBackColor = true;
+            btn_vehiculosucursal.BackgroundImage = (Image)resources.GetObject("btn_vehiculosucursal.BackgroundImage");
+            btn_vehiculosucursal.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_vehiculosucursal.Location = new Point(519, 287);
+            btn_vehiculosucursal.Name = "btn_vehiculosucursal";
+            btn_vehiculosucursal.Size = new Size(74, 70);
+            btn_vehiculosucursal.TabIndex = 6;
+            btn_vehiculosucursal.UseVisualStyleBackColor = true;
+            btn_vehiculosucursal.Click += btn_vehiculosucursal_Click;
             // 
-            // button8
+            // btn_vehiculo
             // 
-            button8.Location = new Point(519, 202);
-            button8.Name = "button8";
-            button8.Size = new Size(74, 70);
-            button8.TabIndex = 7;
-            button8.UseVisualStyleBackColor = true;
+            btn_vehiculo.BackgroundImage = (Image)resources.GetObject("btn_vehiculo.BackgroundImage");
+            btn_vehiculo.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_vehiculo.Location = new Point(519, 202);
+            btn_vehiculo.Name = "btn_vehiculo";
+            btn_vehiculo.Size = new Size(74, 70);
+            btn_vehiculo.TabIndex = 7;
+            btn_vehiculo.UseVisualStyleBackColor = true;
+            btn_vehiculo.Click += btn_vehiculo_Click;
             // 
             // label1
             // 
@@ -146,9 +158,9 @@
             label3.ForeColor = Color.LightCoral;
             label3.Location = new Point(210, 311);
             label3.Name = "label3";
-            label3.Size = new Size(172, 25);
+            label3.Size = new Size(94, 25);
             label3.TabIndex = 10;
-            label3.Text = "Categoría Vehiculo";
+            label3.Text = "Vendedor";
             // 
             // label4
             // 
@@ -170,9 +182,9 @@
             label5.ForeColor = Color.LightCoral;
             label5.Location = new Point(599, 147);
             label5.Name = "label5";
-            label5.Size = new Size(172, 25);
+            label5.Size = new Size(83, 25);
             label5.TabIndex = 12;
-            label5.Text = "Categoría Vehiculo";
+            label5.Text = "Sucursal";
             // 
             // label6
             // 
@@ -182,9 +194,9 @@
             label6.ForeColor = Color.LightCoral;
             label6.Location = new Point(599, 223);
             label6.Name = "label6";
-            label6.Size = new Size(172, 25);
+            label6.Size = new Size(90, 25);
             label6.TabIndex = 13;
-            label6.Text = "Categoría Vehiculo";
+            label6.Text = " Vehiculo";
             // 
             // label7
             // 
@@ -194,9 +206,9 @@
             label7.ForeColor = Color.LightCoral;
             label7.Location = new Point(599, 308);
             label7.Name = "label7";
-            label7.Size = new Size(172, 25);
+            label7.Size = new Size(163, 25);
             label7.TabIndex = 14;
-            label7.Text = "Categoría Vehiculo";
+            label7.Text = "Vehiculo-Sucursal";
             // 
             // btn_categoria
             // 
@@ -223,11 +235,11 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button8);
-            Controls.Add(button7);
+            Controls.Add(btn_vehiculo);
+            Controls.Add(btn_vehiculosucursal);
             Controls.Add(btn_cliente);
-            Controls.Add(button5);
-            Controls.Add(button4);
+            Controls.Add(btn_vendedor);
+            Controls.Add(btn_sucursal);
             Controls.Add(btn_salir);
             Controls.Add(btn_atras);
             Name = "MenuRegistros";
@@ -240,11 +252,11 @@
 
         private Button btn_atras;
         private Button btn_salir;
-        private Button button4;
-        private Button button5;
+        private Button btn_sucursal;
+        private Button btn_vendedor;
         private Button btn_cliente;
-        private Button button7;
-        private Button button8;
+        private Button btn_vehiculosucursal;
+        private Button btn_vehiculo;
         private Label label1;
         private Label label2;
         private Label label3;
