@@ -19,11 +19,12 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     public class Cliente : Persona
-    { //Propiedades de la clase Cliente, heredando de Persona                 
-        public bool Activo { get; set; }
-        public DateTime FechaRegistro { get; set; }
+    { //Propiedades de la clase Cliente, heredando de Persona
+        public int IdCliente { get; set; }
         public DateTime FechaNacimiento { get; set; }
-
+        public DateTime FechaRegistro { get; set; }
+        public bool Activo { get; set; }
+ 
         //Constructor de la clase Cliente, llamando al constructor de la clase
         //base Persona para inicializar las propiedades heredadas
         public Cliente(string identificacion, string nombre, DateTime fechaNacimiento, DateTime fechaRegistro, bool activo)
@@ -33,11 +34,20 @@ namespace Entidades
             FechaRegistro = fechaRegistro;
             Activo = activo;
         }
+        public Cliente(int idcliente,string identificacion, string nombre, DateTime fechaNacimiento, DateTime fechaRegistro, bool activo)
+            : base(identificacion, nombre)
+        {
+            IdCliente = idcliente;
+            FechaNacimiento = fechaNacimiento;
+            FechaRegistro = fechaRegistro;
+            Activo = activo;
+        }
         //Sobrescribe el método ToString para mostrar el nombre completo y el estado del cliente
         public override string ToString()
         {
             return NombreCompleto + " - Cliente";
         }
+      
         public override string ObtenerTipo()
         {
             return "Cliente";

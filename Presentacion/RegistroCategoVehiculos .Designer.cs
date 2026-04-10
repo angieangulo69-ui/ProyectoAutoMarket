@@ -174,11 +174,11 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.LightCoral;
-            label4.Location = new Point(113, 107);
+            label4.Location = new Point(26, 107);
             label4.Name = "label4";
-            label4.Size = new Size(34, 25);
+            label4.Size = new Size(121, 25);
             label4.TabIndex = 19;
-            label4.Text = "Id:";
+            label4.Text = "Id Categoría:";
             // 
             // txt_idcategoria
             // 

@@ -33,7 +33,7 @@
             btn_salir = new Button();
             button4 = new Button();
             button5 = new Button();
-            button6 = new Button();
+            btn_cliente = new Button();
             button7 = new Button();
             button8 = new Button();
             label1 = new Label();
@@ -86,13 +86,17 @@
             button5.TabIndex = 4;
             button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btn_cliente
             // 
-            button6.Location = new Point(130, 204);
-            button6.Name = "button6";
-            button6.Size = new Size(74, 70);
-            button6.TabIndex = 5;
-            button6.UseVisualStyleBackColor = true;
+            btn_cliente.BackColor = Color.Transparent;
+            btn_cliente.BackgroundImage = (Image)resources.GetObject("btn_cliente.BackgroundImage");
+            btn_cliente.BackgroundImageLayout = ImageLayout.Stretch;
+            btn_cliente.Location = new Point(130, 204);
+            btn_cliente.Name = "btn_cliente";
+            btn_cliente.Size = new Size(74, 70);
+            btn_cliente.TabIndex = 5;
+            btn_cliente.UseVisualStyleBackColor = false;
+            btn_cliente.Click += btn_cliente_Click;
             // 
             // button7
             // 
@@ -154,9 +158,9 @@
             label4.ForeColor = Color.LightCoral;
             label4.Location = new Point(210, 223);
             label4.Name = "label4";
-            label4.Size = new Size(172, 25);
+            label4.Size = new Size(71, 25);
             label4.TabIndex = 11;
-            label4.Text = "Categoría Vehiculo";
+            label4.Text = "Cliente";
             // 
             // label5
             // 
@@ -221,7 +225,7 @@
             Controls.Add(label1);
             Controls.Add(button8);
             Controls.Add(button7);
-            Controls.Add(button6);
+            Controls.Add(btn_cliente);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(btn_salir);
@@ -238,7 +242,7 @@
         private Button btn_salir;
         private Button button4;
         private Button button5;
-        private Button button6;
+        private Button btn_cliente;
         private Button button7;
         private Button button8;
         private Label label1;

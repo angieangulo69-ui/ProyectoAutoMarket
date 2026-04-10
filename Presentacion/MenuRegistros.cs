@@ -37,5 +37,13 @@ namespace Presentacion
             RegistroCategoVehiculos.Show();
             this.Close(); //Cierra la ventana actual
         }
+
+        private void btn_cliente_Click(object sender, EventArgs e)
+        {
+            //Llamo a la ventana de  Registrar Clientes
+            RegistroCliente RegistroClientes = new RegistroCliente();
+            RegistroClientes.Show();
+            this.Close(); //Cierra la ventana actual
+        }
     }
 }
