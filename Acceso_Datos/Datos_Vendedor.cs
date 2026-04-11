@@ -27,7 +27,7 @@ namespace Acceso_Datos
                         cmd.Parameters.AddWithValue("@Identificacion", vendedor.Identificacion);
                         cmd.Parameters.AddWithValue("@NombreCompleto", vendedor.NombreCompleto);
                         cmd.Parameters.AddWithValue("@FechaNacimiento", vendedor.FechaNacimiento);
-                        cmd.Parameters.AddWithValue("@FechaRegistro", vendedor.FechaIngreso);
+                        cmd.Parameters.AddWithValue("@FechaIngreso", vendedor.FechaIngreso);
                         cmd.Parameters.AddWithValue("@Telefono", vendedor.Telefono);
 
                         cmd.ExecuteNonQuery();
@@ -36,8 +36,7 @@ namespace Acceso_Datos
             }
             catch (Exception ex)
             {
-                // Manejo de errores, por ejemplo, registrar el error o mostrar un mensaje
-                Console.WriteLine("Error al insertar vendedor: " + ex.Message);
+                throw new Exception("Error al insertar vendedor: " + ex.Message);
             }
         }
         public List<Vendedor> ObtenerVendedor()

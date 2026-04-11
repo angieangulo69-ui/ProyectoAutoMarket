@@ -17,18 +17,18 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     public class CategoriaVehiculo
-    {                  
-            //atributos de la clase
-            public int IdCategoria { get; set; }
-            public string NombreCategoria { get; set; }
-            public string Descripcion { get; set; }
+    {
+        //atributos de la clase
+        public int IdCategoria { get; set; }
+        public string NombreCategoria { get; set; }
+        public string Descripcion { get; set; }
 
         //Constructor de la clase
         public CategoriaVehiculo(string nombre, string descripcion)
-            {              
-                NombreCategoria = nombre;
-                Descripcion = descripcion;
-            }
+        {
+            NombreCategoria = nombre;
+            Descripcion = descripcion;
+        }
         //sobrecarga del constructor para no tener que pasar el id al crear una nueva categoría, el id se asigna automáticamente
         public CategoriaVehiculo(int id, string nombre, string descripcion)
         {
@@ -37,11 +37,12 @@ namespace Entidades
             Descripcion = descripcion;
         }
         public override string ToString()
-            {
-                return NombreCategoria;
-            }
+        {
+            return NombreCategoria;
         }
+
     }
+ }
 
 
 

@@ -16,45 +16,40 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     public class Vehiculo
-    {     
+    {
         //Propiedades de la clase Vehiculo
-        public int IdVehiculo { get; private set; }
+        public int IdVehiculo { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public int Ano { get; set; }
         public decimal Precio { get; set; }
-        public int  Categoria { get; set; }
+        // 
+        public int IdCategoria { get; set; }
+        public CategoriaVehiculo Categoria { get; set; }
         public char Estado { get; set; }
 
-        //Constructor de la clase Vehiculo para inicializar las propiedades, con validación para el estado
-        public Vehiculo(string marca, string modelo, int ano,
-                        decimal precio, int categoria, char estado)
-        {
-       
-            Marca = marca;
-            Modelo = modelo;
-            Ano = ano;
-            Precio = precio;
-            Categoria = categoria;
-            Estado = estado;
-        }
 
-        public Vehiculo(int id, string? marca, string? modelo, int ano, decimal precio, int categoria, char estado)
+        // constructores
+        //vacio para cargar desde la base de datos
+        public Vehiculo()
+        {
+        }
+        //
+        public Vehiculo(int id, string? marca, string? modelo, int ano, decimal precio, int idcategoria, char estado)
         {
             this.IdVehiculo = id;
             Marca = marca;
             Modelo = modelo;
             Ano = ano;
             Precio = precio;
-            Categoria = categoria;
+            IdCategoria = idcategoria;
             Estado = estado;
         }
-   
+
         public override string ToString()
         {
-            return Marca + " " + Modelo + " (" + Ano + ")";
+            return $"{Marca} {Modelo} ({Ano})";
         }
+
     }
-
 }
-

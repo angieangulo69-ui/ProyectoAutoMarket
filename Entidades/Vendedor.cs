@@ -38,6 +38,9 @@ namespace Entidades
                 Telefono = telefono;
                 FechaNacimiento = fechaNacimiento;
         }
+        public Vendedor():base("","")
+        {
+        }
         // Sobrescribe el método ToString para mostrar el nombre completo del vendedor junto con su rol
         public override string ToString()
         {

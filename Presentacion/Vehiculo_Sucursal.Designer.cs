@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vehiculo_Sucursal));
-            data_sucursal = new DataGridView();
+            data_sucursalxVehiculo = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
             label6 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -40,24 +43,42 @@
             comboBox_idsucursal = new ComboBox();
             comboBox_idvehiculo = new ComboBox();
             txt_cantidad = new TextBox();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)data_sucursal).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)data_sucursalxVehiculo).BeginInit();
             SuspendLayout();
             // 
-            // data_sucursal
+            // data_sucursalxVehiculo
             // 
-            data_sucursal.BackgroundColor = Color.Black;
-            data_sucursal.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            data_sucursal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            data_sucursal.Columns.AddRange(new DataGridViewColumn[] { Column1, Column3, Column2 });
-            data_sucursal.GridColor = SystemColors.HighlightText;
-            data_sucursal.Location = new Point(400, 143);
-            data_sucursal.Name = "data_sucursal";
-            data_sucursal.RowHeadersWidth = 51;
-            data_sucursal.Size = new Size(423, 316);
-            data_sucursal.TabIndex = 45;
+            data_sucursalxVehiculo.BackgroundColor = Color.Black;
+            data_sucursalxVehiculo.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            data_sucursalxVehiculo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            data_sucursalxVehiculo.Columns.AddRange(new DataGridViewColumn[] { Column1, Column3, Column2 });
+            data_sucursalxVehiculo.GridColor = SystemColors.HighlightText;
+            data_sucursalxVehiculo.Location = new Point(400, 143);
+            data_sucursalxVehiculo.Name = "data_sucursalxVehiculo";
+            data_sucursalxVehiculo.RowHeadersWidth = 51;
+            data_sucursalxVehiculo.Size = new Size(423, 316);
+            data_sucursalxVehiculo.TabIndex = 45;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Id Sucursal";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 125;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Id Vehiculo";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 125;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Cantidad";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Width = 125;
             // 
             // label6
             // 
@@ -107,6 +128,7 @@
             btn_registrar.Text = "Registrar";
             btn_registrar.TextImageRelation = TextImageRelation.TextBeforeImage;
             btn_registrar.UseVisualStyleBackColor = false;
+            btn_registrar.Click += btn_registrar_Click;
             // 
             // btn_salir
             // 
@@ -165,27 +187,6 @@
             txt_cantidad.Size = new Size(147, 27);
             txt_cantidad.TabIndex = 87;
             // 
-            // Column1
-            // 
-            Column1.HeaderText = "Id Sucursal";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Id Vehiculo";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Cantidad";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
             // Vehiculo_Sucursal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -203,17 +204,17 @@
             Controls.Add(btn_salir);
             Controls.Add(label1);
             Controls.Add(btn_atras);
-            Controls.Add(data_sucursal);
+            Controls.Add(data_sucursalxVehiculo);
             Name = "Vehiculo_Sucursal";
             Text = "Vehiculo_Sucursal";
-            ((System.ComponentModel.ISupportInitialize)data_sucursal).EndInit();
+            ((System.ComponentModel.ISupportInitialize)data_sucursalxVehiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView data_sucursal;
+        private DataGridView data_sucursalxVehiculo;
         private Label label6;
         private Label label3;
         private Label label4;

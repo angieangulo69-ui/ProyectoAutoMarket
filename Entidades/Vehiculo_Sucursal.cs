@@ -19,23 +19,17 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     public class Vehiculo_Sucursal
-    {      
-            public Sucursal Sucursal { get; set; }
-            public Vehiculo Vehiculo { get; set; }
-            public int Cantidad { get; set; }
+    {
+        public string Sucursal { get; set; }
+        public string  Vehiculo { get; set; }
+        public int Cantidad { get; set; }
 
-            public Vehiculo_Sucursal(Sucursal sucursal, Vehiculo vehiculo, int cantidad)
-            {   //valida que  no se usen sucursales inactivas y que la cantidad sea mayor que cero
-                if (!sucursal.Activo)
-                    throw new ArgumentException("No se pueden asociar vehículos a sucursales inactivas.");
-
-                if (cantidad <= 0)
-                    throw new ArgumentException("La cantidad debe ser mayor que cero.");
-
-                Sucursal = sucursal;
-                Vehiculo = vehiculo;
-                Cantidad = cantidad;
-            }
+        public Vehiculo_Sucursal(string sucursal, string vehiculo, int cantidad)
+        {
+            Sucursal = sucursal;
+            Vehiculo = vehiculo;
+            Cantidad = cantidad;
         }
     }
+}
 

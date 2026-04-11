@@ -39,12 +39,6 @@
             label4 = new Label();
             btn_registrar = new Button();
             data_sucursal = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
             btn_salir = new Button();
             label1 = new Label();
             btn_atras = new Button();
@@ -155,55 +149,12 @@
             data_sucursal.BackgroundColor = Color.Black;
             data_sucursal.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             data_sucursal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            data_sucursal.Columns.AddRange(new DataGridViewColumn[] { Column1, Column3, Column2, Column5, Column4, Column6 });
             data_sucursal.GridColor = SystemColors.HighlightText;
             data_sucursal.Location = new Point(393, 102);
             data_sucursal.Name = "data_sucursal";
             data_sucursal.RowHeadersWidth = 51;
             data_sucursal.Size = new Size(761, 316);
             data_sucursal.TabIndex = 44;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Id Sucursal";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Nombre";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Dirección";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Teléfono";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Encargado";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Activo";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
             // 
             // btn_salir
             // 
@@ -331,11 +282,5 @@
         private Label label6;
         private Label label7;
         private ComboBox comboBox_encargado;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
     }
 }

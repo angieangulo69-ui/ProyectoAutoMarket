@@ -35,6 +35,9 @@ namespace Entidades
             NombreCompleto = nombre;
 
         }
+        public Persona()
+        {
+        }
 
         //Sobrescribe el método ToString para mostrar el nombre completo de la persona
         public override string ToString()

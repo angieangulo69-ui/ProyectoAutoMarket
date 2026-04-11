@@ -70,8 +70,7 @@ namespace Presentacion
         private void CargarGrid_Vendedor()
         {
             try
-            {
-                Logica_Vendedor logica = new Logica_Vendedor();
+            {               
                 var listaVendedores = logica.ConsultarVendedor(); // Obtener la lista de vendedores desde la lógica
                 data_clientes.Rows.Clear(); // Limpiar las filas existentes en el DataGridView
                 foreach (var vendedor in listaVendedores)
@@ -96,8 +95,7 @@ namespace Presentacion
 
             txt_idvendedor.Text = logica.ObtenerSiguienteId().ToString(); // Actualizar el ID para el próximo cliente
         }
-        
-        
+           
 
         private void btn_atras_Click(object sender, EventArgs e)
         {

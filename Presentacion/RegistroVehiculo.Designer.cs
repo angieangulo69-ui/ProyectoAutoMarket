@@ -42,12 +42,6 @@
             label1 = new Label();
             btn_atras = new Button();
             data_vehiculo = new DataGridView();
-            txt_anio = new TextBox();
-            txt_modelo = new TextBox();
-            txt_precio = new TextBox();
-            label8 = new Label();
-            combox_categoria = new ComboBox();
-            combox_estado = new ComboBox();
             Column1 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -55,6 +49,12 @@
             Column4 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
+            txt_anio = new TextBox();
+            txt_modelo = new TextBox();
+            txt_precio = new TextBox();
+            label8 = new Label();
+            combox_categoria = new ComboBox();
+            combox_estado = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)data_vehiculo).BeginInit();
             SuspendLayout();
             // 
@@ -169,6 +169,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 64;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label1
             // 
@@ -192,6 +193,7 @@
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 62;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
             // 
             // data_vehiculo
             // 
@@ -205,6 +207,55 @@
             data_vehiculo.RowHeadersWidth = 51;
             data_vehiculo.Size = new Size(874, 316);
             data_vehiculo.TabIndex = 78;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Id Vehiculo";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 125;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Marca";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 125;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Modelo";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Width = 125;
+            // 
+            // Column5
+            // 
+            Column5.HeaderText = "Año";
+            Column5.MinimumWidth = 6;
+            Column5.Name = "Column5";
+            Column5.Width = 125;
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Precio";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            Column4.Width = 125;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Id Categoría";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            Column6.Width = 125;
+            // 
+            // Column7
+            // 
+            Column7.HeaderText = "Estado";
+            Column7.MinimumWidth = 6;
+            Column7.Name = "Column7";
+            Column7.Width = 125;
             // 
             // txt_anio
             // 
@@ -256,55 +307,6 @@
             combox_estado.Size = new Size(206, 28);
             combox_estado.TabIndex = 84;
             // 
-            // Column1
-            // 
-            Column1.HeaderText = "Id Vehiculo";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Marca";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Modelo";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Año";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Precio";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Id Categoría";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Estado";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 125;
-            // 
             // RegistroVehiculo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -333,6 +335,7 @@
             Controls.Add(btn_atras);
             Name = "RegistroVehiculo";
             Text = "RegistroVehiculo";
+            Load += RegistroVehiculo_Load;
             ((System.ComponentModel.ISupportInitialize)data_vehiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();

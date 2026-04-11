@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
-    public partial class Vehiculo_Sucursal : Form
+    public partial class Consulta_vehiculoxsucursal : Form
     {
-        public Vehiculo_Sucursal()
+        public Consulta_vehiculoxsucursal()
         {
             InitializeComponent();
-        }
-
-        private void btn_registrar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
