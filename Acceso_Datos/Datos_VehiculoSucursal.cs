@@ -52,7 +52,7 @@ namespace Acceso_Datos
                         using (var conn = conexion.ObtenerConexion())
                         {
                             conn.Open();
-                            string query = "SELECT * FROM VehiculoxSucursal";
+                            string query = "SELECT IdSucursal, IdVehiculo, Cantidad FROM VehiculoxSucursal";
 
                             using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
                             {

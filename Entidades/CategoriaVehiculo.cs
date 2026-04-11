@@ -36,6 +36,11 @@ namespace Entidades
             NombreCategoria = nombre;
             Descripcion = descripcion;
         }
+
+        public CategoriaVehiculo()
+        {
+        }
+
         public override string ToString()
         {
             return NombreCategoria;

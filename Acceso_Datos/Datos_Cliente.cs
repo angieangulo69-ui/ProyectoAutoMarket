@@ -12,35 +12,39 @@ namespace Acceso_Datos
     public class Datos_Cliente
     {// Clase para gestionar el acceso a datos de los clientes, utilizando una instancia de la clase Conexion para interactuar con la base de datos.
         private Conexion conexion = new Conexion();
-        public void InsertarCliente(Cliente cliente)
+        public bool InsertarCliente(Cliente cliente)
         {
-            try
-            {
-                using (var conn = conexion.ObtenerConexion())
-                {
-                    conn.Open();
-                    string query = "INSERT INTO Cliente (IdCliente,Identificacion, NombreCompleto, FechaNacimiento, FechaRegistro, Activo) " +
-                                   "VALUES (@IdCliente,@Identificacion, @NombreCompleto, @FechaNacimiento, @FechaRegistro, @Activo)";
-                    // Se utiliza un comando SQL parametrizado para evitar inyecciones SQL y asegurar la integridad de los datos.
-                    using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
-                        cmd.Parameters.AddWithValue("@Identificacion", cliente.Identificacion);
-                        cmd.Parameters.AddWithValue("@NombreCompleto", cliente.NombreCompleto);
-                        cmd.Parameters.AddWithValue("@FechaNacimiento", cliente.FechaNacimiento);
-                        cmd.Parameters.AddWithValue("@FechaRegistro", cliente.FechaRegistro);
-                        cmd.Parameters.AddWithValue("@Activo", cliente.Activo);
 
-                        cmd.ExecuteNonQuery();
+            using (var conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = "INSERT INTO Cliente (IdCliente,Identificacion, NombreCompleto, FechaNacimiento, FechaRegistro, Activo) " +
+                               "VALUES (@IdCliente,@Identificacion, @NombreCompleto, @FechaNacimiento, @FechaRegistro, @Activo)";
+                // Se utiliza un comando SQL parametrizado para evitar inyecciones SQL y asegurar la integridad de los datos.
+                using (var comando = new System.Data.SqlClient.SqlCommand(query, conn))
+                {
+                    comando.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
+                    comando.Parameters.AddWithValue("@Identificacion", cliente.Identificacion);
+                    comando.Parameters.AddWithValue("@NombreCompleto", cliente.NombreCompleto);
+                    comando.Parameters.AddWithValue("@FechaNacimiento", cliente.FechaNacimiento);
+                    comando.Parameters.AddWithValue("@FechaRegistro", cliente.FechaRegistro);
+                    comando.Parameters.AddWithValue("@Activo", cliente.Activo);
+
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    if (filasAfectadas == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo insertar la categoría de vehículo.");
+                        return false;
                     }
                 }
+
             }
-            catch (Exception ex)
-            {
-                // Manejo de errores, por ejemplo, registrar el error o mostrar un mensaje
-                Console.WriteLine("Error al insertar cliente: " + ex.Message);
-            }
-        }
+        }    
+        
         public List<Cliente> ObtenerClientes()
         {
             List<Cliente> listaclientes = new List<Cliente>();
