@@ -25,25 +25,25 @@ namespace Presentacion
 
         private void btn_categoria_Click(object sender, EventArgs e)
         {//Llamo a la ventana de  Registrar de categoria de vehiculos
-            RegistroCategoVehiculos RegistroCategoVehiculos = new RegistroCategoVehiculos();
-            RegistroCategoVehiculos.Show();
+            Consulta_Categoria ConsultaCategoVehiculos = new Consulta_Categoria();
+            ConsultaCategoVehiculos.Show();
             this.Close(); //Cierra la ventana actual
 
         }
 
         private void btn_cliente_Click(object sender, EventArgs e)
         {
-            //Llamo a la ventana de  Registrar Clientes
-            RegistroCliente RegistroClientes = new RegistroCliente();
-            RegistroClientes.Show();
+            //Llamo a la ventana de  Consulta Clientes
+            Consulta_Cliente ConsultaClientes = new Consulta_Cliente();
+            ConsultaClientes.Show();
             this.Close(); //Cierra la ventana actual
         }
 
         private void btn_vendedor_Click(object sender, EventArgs e)
         {
-            // Llamo a la ventana de  Registrar de vehiculos
-            Registro_Vendedor Registro_Vendedores = new Registro_Vendedor();
-            Registro_Vendedores.Show();
+            // Llamo a la ventana de  Consulta de vehiculos
+            Consulta_Vendedor Consulta_Vendedores = new Consulta_Vendedor();
+            Consulta_Vendedores.Show();
             this.Close(); //Cierra la ventana actual
         }
         
@@ -63,25 +63,25 @@ namespace Presentacion
 
         private void btn_sucursal_Click(object sender, EventArgs e)
         {
-            // Llamo a la ventana de  Registrarde sucursales
-            RegistroSucursal Registrar_Sucursales = new RegistroSucursal();
-            Registrar_Sucursales.Show();
+            // Llamo a la ventana de  Consulta de sucursales
+            Consulta_Sucursal ConsultaSucursales = new Consulta_Sucursal();
+            ConsultaSucursales.Show();
             this.Close(); //Cierra la ventana actual
         }
 
         private void btn_vehiculo_Click(object sender, EventArgs e)
         {
-            //Llamo a la ventana de Registrar de vehiculos
-            RegistroVehiculo Registro_Vehiculos = new RegistroVehiculo();
-            Registro_Vehiculos.Show();
+            //Llamo a la ventana de Consulta de vehiculos
+            Consulta_Vehiculo Consulta_Vehiculos = new Consulta_Vehiculo();
+            Consulta_Vehiculos.Show();
             this.Close(); //Cierra la ventana actual
         }
 
         private void btn_vehiculosucursal_Click(object sender, EventArgs e)
         {
-            // Llamo a la ventana de  Registrar de sucursales
-            Vehiculo_Sucursal Registrar_Vehiculo_Sucursal = new Vehiculo_Sucursal();
-            Registrar_Vehiculo_Sucursal.Show();
+            // Llamo a la ventana de  Consulta de vehiculos por sucursal
+            Consulta_vehiculoxsucursal ConsultaVehiculoXSucursal = new Consulta_vehiculoxsucursal();
+            ConsultaVehiculoXSucursal.Show();
             this.Close(); //Cierra la ventana actual
         }
     }

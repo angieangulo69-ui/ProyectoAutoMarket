@@ -58,6 +58,7 @@
             data_sucursalxVehiculo.RowHeadersWidth = 51;
             data_sucursalxVehiculo.Size = new Size(423, 316);
             data_sucursalxVehiculo.TabIndex = 45;
+            data_sucursalxVehiculo.CellContentClick += data_sucursalxVehiculo_CellContentClick;
             // 
             // Column1
             // 
@@ -140,6 +141,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 77;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label1
             // 
@@ -158,11 +160,12 @@
             btn_atras.BackColor = Color.Black;
             btn_atras.BackgroundImage = (Image)resources.GetObject("btn_atras.BackgroundImage");
             btn_atras.BackgroundImageLayout = ImageLayout.Stretch;
-            btn_atras.Location = new Point(12, 522);
+            btn_atras.Location = new Point(13, 533);
             btn_atras.Name = "btn_atras";
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 75;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
             // 
             // comboBox_idsucursal
             // 
@@ -171,6 +174,7 @@
             comboBox_idsucursal.Name = "comboBox_idsucursal";
             comboBox_idsucursal.Size = new Size(151, 28);
             comboBox_idsucursal.TabIndex = 85;
+            comboBox_idsucursal.SelectedIndexChanged += comboBox_idsucursal_SelectedIndexChanged;
             // 
             // comboBox_idvehiculo
             // 
@@ -179,6 +183,7 @@
             comboBox_idvehiculo.Name = "comboBox_idvehiculo";
             comboBox_idvehiculo.Size = new Size(151, 28);
             comboBox_idvehiculo.TabIndex = 86;
+            comboBox_idvehiculo.SelectedIndexChanged += comboBox_idvehiculo_SelectedIndexChanged;
             // 
             // txt_cantidad
             // 
@@ -186,6 +191,7 @@
             txt_cantidad.Name = "txt_cantidad";
             txt_cantidad.Size = new Size(147, 27);
             txt_cantidad.TabIndex = 87;
+            txt_cantidad.TextChanged += txt_cantidad_TextChanged;
             // 
             // Vehiculo_Sucursal
             // 
@@ -193,7 +199,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(976, 610);
+            ClientSize = new Size(909, 594);
             Controls.Add(txt_cantidad);
             Controls.Add(comboBox_idvehiculo);
             Controls.Add(comboBox_idsucursal);
@@ -207,6 +213,7 @@
             Controls.Add(data_sucursalxVehiculo);
             Name = "Vehiculo_Sucursal";
             Text = "Vehiculo_Sucursal";
+            Load += Vehiculo_Sucursal_Load;
             ((System.ComponentModel.ISupportInitialize)data_sucursalxVehiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();

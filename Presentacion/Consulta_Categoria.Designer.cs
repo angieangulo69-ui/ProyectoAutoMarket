@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Consulta_Categoria));
-            txt_idcategoria = new TextBox();
             label4 = new Label();
-            btn_registrar = new Button();
+            btn_consultar = new Button();
             data_categoriavehiculos = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
@@ -39,16 +38,10 @@
             btn_salir = new Button();
             label1 = new Label();
             btn_atras = new Button();
+            comboBoxcategoria = new ComboBox();
+            btn_consultacategorias = new Button();
             ((System.ComponentModel.ISupportInitialize)data_categoriavehiculos).BeginInit();
             SuspendLayout();
-            // 
-            // txt_idcategoria
-            // 
-            txt_idcategoria.Location = new Point(161, 105);
-            txt_idcategoria.Name = "txt_idcategoria";
-            txt_idcategoria.ReadOnly = true;
-            txt_idcategoria.Size = new Size(125, 27);
-            txt_idcategoria.TabIndex = 31;
             // 
             // label4
             // 
@@ -62,18 +55,19 @@
             label4.TabIndex = 30;
             label4.Text = "Categoría:";
             // 
-            // btn_registrar
+            // btn_consultar
             // 
-            btn_registrar.BackColor = SystemColors.ActiveCaptionText;
-            btn_registrar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_registrar.ForeColor = Color.DeepSkyBlue;
-            btn_registrar.Location = new Point(319, 92);
-            btn_registrar.Name = "btn_registrar";
-            btn_registrar.Size = new Size(109, 40);
-            btn_registrar.TabIndex = 29;
-            btn_registrar.Text = "Registrar";
-            btn_registrar.TextImageRelation = TextImageRelation.TextBeforeImage;
-            btn_registrar.UseVisualStyleBackColor = false;
+            btn_consultar.BackColor = SystemColors.ActiveCaptionText;
+            btn_consultar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_consultar.ForeColor = Color.DeepSkyBlue;
+            btn_consultar.Location = new Point(319, 92);
+            btn_consultar.Name = "btn_consultar";
+            btn_consultar.Size = new Size(109, 40);
+            btn_consultar.TabIndex = 29;
+            btn_consultar.Text = "Consulta";
+            btn_consultar.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btn_consultar.UseVisualStyleBackColor = false;
+            btn_consultar.Click += btn_consulta_Click;
             // 
             // data_categoriavehiculos
             // 
@@ -81,11 +75,12 @@
             data_categoriavehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             data_categoriavehiculos.Columns.AddRange(new DataGridViewColumn[] { Id, Nombre, Descripción });
             data_categoriavehiculos.GridColor = SystemColors.HighlightText;
-            data_categoriavehiculos.Location = new Point(161, 168);
+            data_categoriavehiculos.Location = new Point(149, 204);
             data_categoriavehiculos.Name = "data_categoriavehiculos";
             data_categoriavehiculos.RowHeadersWidth = 51;
             data_categoriavehiculos.Size = new Size(395, 188);
             data_categoriavehiculos.TabIndex = 28;
+            data_categoriavehiculos.CellContentClick += data_categoriavehiculos_CellContentClick;
             // 
             // Id
             // 
@@ -118,6 +113,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 24;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label1
             // 
@@ -141,6 +137,30 @@
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 21;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
+            // 
+            // comboBoxcategoria
+            // 
+            comboBoxcategoria.FormattingEnabled = true;
+            comboBoxcategoria.Location = new Point(161, 102);
+            comboBoxcategoria.Name = "comboBoxcategoria";
+            comboBoxcategoria.Size = new Size(151, 28);
+            comboBoxcategoria.TabIndex = 32;
+            comboBoxcategoria.SelectedIndexChanged += comboBoxcategoria_SelectedIndexChanged;
+            // 
+            // btn_consultacategorias
+            // 
+            btn_consultacategorias.BackColor = SystemColors.ActiveCaptionText;
+            btn_consultacategorias.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_consultacategorias.ForeColor = Color.DeepSkyBlue;
+            btn_consultacategorias.Location = new Point(447, 90);
+            btn_consultacategorias.Name = "btn_consultacategorias";
+            btn_consultacategorias.Size = new Size(109, 40);
+            btn_consultacategorias.TabIndex = 33;
+            btn_consultacategorias.Text = "Historial";
+            btn_consultacategorias.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btn_consultacategorias.UseVisualStyleBackColor = false;
+            btn_consultacategorias.Click += btn_consultacategorias_Click;
             // 
             // Consulta_Categoria
             // 
@@ -148,25 +168,25 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(800, 450);
-            Controls.Add(txt_idcategoria);
+            Controls.Add(btn_consultacategorias);
+            Controls.Add(comboBoxcategoria);
             Controls.Add(label4);
-            Controls.Add(btn_registrar);
+            Controls.Add(btn_consultar);
             Controls.Add(data_categoriavehiculos);
             Controls.Add(btn_salir);
             Controls.Add(label1);
             Controls.Add(btn_atras);
             Name = "Consulta_Categoria";
             Text = "Consulta_Categoria";
+            Load += Consulta_Categoria_Load;
             ((System.ComponentModel.ISupportInitialize)data_categoriavehiculos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox txt_idcategoria;
         private Label label4;
-        private Button btn_registrar;
+        private Button btn_consultar;
         private DataGridView data_categoriavehiculos;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nombre;
@@ -174,5 +194,7 @@
         private Button btn_salir;
         private Label label1;
         private Button btn_atras;
+        private ComboBox comboBoxcategoria;
+        private Button btn_consultacategorias;
     }
 }

@@ -17,10 +17,8 @@ namespace Entidades
 {
     public class Persona
     {
-        private static int contadorId = 1; // Contador estático para generar IDs únicos automáticamente 
-        //Propiedades de la clase Persona
-        public int Id { get; private set; } // get porque puuedo leer desde cualquier parte del programa, pero set es
-                                            // privado porque solo se puede asignar dentro de la clase Persona
+        private static int contadorId;
+
         public string Identificacion { get; set; }
         public string NombreCompleto { get; set; }
 
@@ -29,8 +27,7 @@ namespace Entidades
         {    //valida si el campo de identificación está vacío o solo contiene espacios en blanco
             if (string.IsNullOrWhiteSpace(nombre))
                 throw new ArgumentException("El nombre es obligatorio.");
-
-            Id = contadorId++;
+         
             Identificacion = identificacion;
             NombreCompleto = nombre;
 

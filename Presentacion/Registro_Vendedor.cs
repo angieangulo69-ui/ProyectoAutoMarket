@@ -41,7 +41,8 @@ namespace Presentacion
                 }
 
                 int nuevoId = logica.ObtenerSiguienteId();
-                Vendedor nuevoVendedor = new Vendedor(mask_identificacion.Text, txt_nombre.Text, dateTimeNacimiento.Value, dateTimeIngreso.Value, mask_telefono.Text);
+                Vendedor nuevoVendedor = new Vendedor(mask_identificacion.Text, txt_nombre.Text,
+                    dateTimeNacimiento.Value, dateTimeIngreso.Value, mask_telefono.Text);
 
                 nuevoVendedor.IdVendedor = nuevoId;
 
@@ -58,27 +59,31 @@ namespace Presentacion
         }
              private void configurarDataGridView()
              {
-            // Configura el DataGridView para mostrar los clientes de manera ordenada
-            data_clientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            // Ajusta el tamaño de las filas para mostrar todo el contenido
-            data_clientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            // Configura el DataGridView para que no se puedan editar las celdas ni agregar filas directamente
-            data_clientes.ReadOnly = true;
-            //data_clientes.AutoGenerateColumns = true;
-            data_clientes.AllowUserToAddRows = false;
+               
+               data_vendedor.AutoGenerateColumns = false;
+               data_vendedor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+              data_vendedor.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+             data_vendedor.ReadOnly = true;
+             data_vendedor.AllowUserToAddRows = false;
+
         }
         private void CargarGrid_Vendedor()
         {
             try
-            {               
-                var listaVendedores = logica.ConsultarVendedor(); // Obtener la lista de vendedores desde la lógica
-                data_clientes.Rows.Clear(); // Limpiar las filas existentes en el DataGridView
+            {
+                var listaVendedores = logica.ConsultarVendedor() ?? new List<Vendedor>();
+                data_vendedor.Rows.Clear();
+
                 foreach (var vendedor in listaVendedores)
                 {
-                    data_clientes.Rows.Add(vendedor.IdVendedor, vendedor.Identificacion, vendedor.NombreCompleto, vendedor.FechaNacimiento.ToShortDateString(), vendedor.FechaIngreso.ToShortDateString(), vendedor.Telefono);
-                }
+                    string fechaNac = (vendedor.FechaNacimiento == DateTime.MinValue) ? "" : vendedor.FechaNacimiento.ToShortDateString();
+                    string fechaIng = (vendedor.FechaIngreso == DateTime.MinValue) ? "" : vendedor.FechaIngreso.ToShortDateString();
+                    string identificacion = string.IsNullOrWhiteSpace(vendedor.Identificacion) ? "" : vendedor.Identificacion;
+                    string nombre = string.IsNullOrWhiteSpace(vendedor.NombreCompleto) ? "" : vendedor.NombreCompleto;
+                    string telefono = string.IsNullOrWhiteSpace(vendedor.Telefono) ? "" : vendedor.Telefono;
 
-                //data_clientes.DataSource = logica.ConsultarCliente(); // Cargar los clientes en el DataGridView
+                    data_vendedor.Rows.Add(vendedor.IdVendedor, identificacion, nombre, fechaNac, fechaIng, telefono);
+                }
             }
             catch (Exception ex)
             {
@@ -112,12 +117,13 @@ namespace Presentacion
 
         private void Registro_Vendedor_Load(object sender, EventArgs e)
         {
+            
             configurarDataGridView();
             txt_idvendedor.Text = logica.ObtenerSiguienteId().ToString();
             CargarGrid_Vendedor();
         }
 
-        //Metodos
+       
 
     }
 }

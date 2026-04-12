@@ -117,7 +117,7 @@ namespace Presentacion
 
         private void btn_salir_Click(object sender, EventArgs e)
         {
-               Application.Exit();
+            this.Close();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)

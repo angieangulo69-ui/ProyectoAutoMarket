@@ -2,103 +2,150 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Acceso_Datos
 {
     public class Datos_VehiculoSucursal
     {
+        private Conexion conexion = new Conexion();
 
-        public class Datos_Cliente
-        {// Clase para gestionar el acceso a datos de los clientes, utilizando una instancia de la clase Conexion para interactuar con la base de datos.
-            private Conexion conexion = new Conexion();
-
-            public void InsertarVehiculoSucursal(Vehiculo_Sucursal vehiculoSucursal)
+        // 🔹 INSERTAR
+        public bool InsertarVehiculoSucursal(Vehiculo_Sucursal vehiculoSucursal)
+        {
+            try
             {
-                try
+                using (var conn = conexion.ObtenerConexion())
                 {
-                    using (var conn = conexion.ObtenerConexion())
-                    {
-                        conn.Open();
-                        string query = "INSERT INTO VehiculoxSucursal (IdSucursal, IdVehiculo, Cantidad) " +
-                                       "VALUES (@IdSucursal, @IdVehiculo, @Cantidad)";
-                        // Se utiliza un comando SQL parametrizado para evitar inyecciones SQL y asegurar la integridad de los datos.
-                        using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@IdSucursal", vehiculoSucursal.Sucursal);
-                            cmd.Parameters.AddWithValue("@IdVehiculo", vehiculoSucursal.Vehiculo);
-                            cmd.Parameters.AddWithValue("@Cantidad", vehiculoSucursal.Cantidad);
+                    conn.Open();
 
-                            cmd.ExecuteNonQuery();
+                    string query = @"INSERT INTO VehiculoxSucursal 
+                                     (IdSucursal, IdVehiculo, Cantidad)
+                                     VALUES (@IdSucursal, @IdVehiculo, @Cantidad)";
+
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdSucursal", vehiculoSucursal.IdSucursal);
+                        cmd.Parameters.AddWithValue("@IdVehiculo", vehiculoSucursal.IdVehiculo);
+                        cmd.Parameters.AddWithValue("@Cantidad", vehiculoSucursal.Cantidad);
+
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al insertar vehículo en sucursal: " + ex.Message);
+                return false;
+            }
+        }
+
+        // 🔹 OBTENER TODOS
+        public List<Vehiculo_Sucursal> ObtenerVehiculoSucursal()
+        {
+            var lista = new List<Vehiculo_Sucursal>();
+
+            try
+            {
+                using (var conn = conexion.ObtenerConexion())
+                {
+                    conn.Open();
+
+                    string query = "SELECT IdSucursal, IdVehiculo, Cantidad FROM VehiculoxSucursal";
+
+                    using (var cmd = new SqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new Vehiculo_Sucursal
+                            {
+                                IdSucursal = reader.GetInt32(0),
+                                IdVehiculo = reader.GetInt32(1),
+                                Cantidad = reader.GetInt32(2)
+                            });
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Manejo de errores, por ejemplo, registrar el error o mostrar un mensaje
-                    Console.WriteLine("Error al insertar cliente: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener vehículos por sucursal: " + ex.Message);
             }
 
-            public List<Vehiculo_Sucursal> ObtenerVehiculoSucursal()
+            return lista;
+        }
+
+        // 🔹 ACTUALIZAR CANTIDAD (CLAVE COMPUESTA)
+        public bool ActualizarCantidad(int idSucursal, int idVehiculo, int nuevaCantidad)
+        {
+            try
             {
-                List<Vehiculo_Sucursal> listaVehiculoxSucursal = new List<Vehiculo_Sucursal>();
+                using (var conn = conexion.ObtenerConexion())
                 {
+                    conn.Open();
 
-                    try
+                    string query = @"UPDATE VehiculoxSucursal 
+                                     SET Cantidad = @Cantidad 
+                                     WHERE IdSucursal = @IdSucursal 
+                                     AND IdVehiculo = @IdVehiculo";
+
+                    using (var cmd = new SqlCommand(query, conn))
                     {
-                        using (var conn = conexion.ObtenerConexion())
+                        cmd.Parameters.AddWithValue("@Cantidad", nuevaCantidad);
+                        cmd.Parameters.AddWithValue("@IdSucursal", idSucursal);
+                        cmd.Parameters.AddWithValue("@IdVehiculo", idVehiculo);
+
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar cantidad: " + ex.Message);
+            }
+        }
+
+        // 🔹 VERIFICAR SI YA EXISTE (MUY ÚTIL)
+        public Vehiculo_Sucursal ObtenerPorIds(int idSucursal, int idVehiculo)
+        {
+            Vehiculo_Sucursal vehiculo = null;
+
+            try
+            {
+                using (var conn = conexion.ObtenerConexion())
+                {
+                    conn.Open();
+
+                    string query = @"SELECT IdSucursal, IdVehiculo, Cantidad 
+                                     FROM VehiculoxSucursal
+                                     WHERE IdSucursal = @IdSucursal 
+                                     AND IdVehiculo = @IdVehiculo";
+
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdSucursal", idSucursal);
+                        cmd.Parameters.AddWithValue("@IdVehiculo", idVehiculo);
+
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            conn.Open();
-                            string query = "SELECT IdSucursal, IdVehiculo, Cantidad FROM VehiculoxSucursal";
-
-                            using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
+                            if (reader.Read())
                             {
-                                using (var reader = cmd.ExecuteReader())
+                                vehiculo = new Vehiculo_Sucursal
                                 {
-                                    while (reader.Read())
-                                    {
-                                        string idSucursal = reader["IdSucursal"].ToString();
-                                        string idVehiculo = reader["IdVehiculo"].ToString();
-                                        int cantidad = Convert.ToInt32(reader["Cantidad"]);
-
-                                        listaVehiculoxSucursal.Add(new Vehiculo_Sucursal(idSucursal, idVehiculo, cantidad));
-                                    }
-                                }
+                                    IdSucursal = reader.GetInt32(0),
+                                    IdVehiculo = reader.GetInt32(1),
+                                    Cantidad = reader.GetInt32(2)
+                                };
                             }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Error al obtener vehículos por sucursal: " + ex.Message, ex);
-                    }
                 }
-                return listaVehiculoxSucursal;
             }
-            public int ObtenerSiguienteId()
+            catch (Exception ex)
             {
-                int siguienteId = 1; // Valor predeterminado si no hay clientes en la base de datos
-                try
-                {
-                    using (var conn = conexion.ObtenerConexion())
-                    {
-                        conn.Open();
-                        string query = "SELECT ISNULL(MAX(IdVehiculoSucursal),0) + 1 FROM VehiculoxSucursal";
-                        using (var cmd = new SqlCommand(query, conn))
-                        {
-                            siguienteId = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al insertar la asociación : " + ex.Message, ex);
-                }
-                return siguienteId;
+                throw new Exception("Error al verificar vehículo en sucursal: " + ex.Message);
             }
+            return vehiculo;
         }
     }
 }

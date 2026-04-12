@@ -53,25 +53,30 @@ namespace Acceso_Datos
                 using (var conn = conexion.ObtenerConexion())
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Cliente";
+                    string query = "SELECT IdCliente, Identificacion,NombreCompleto,FechaNacimiento,FechaRegistro,Activo FROM Cliente";
 
-                    using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
+                    using (SqlCommand comando = new SqlCommand(query, conn))
                     {
-                        using (var reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = comando.ExecuteReader())
                         {
                             while (reader.Read())
-                            {                                
-                                int id = Convert.ToInt32(reader["IdCliente"]);
-                                string identificacion = reader["Identificacion"].ToString();
-                                string nombre = reader["NombreCompleto"].ToString();
-                                DateTime fechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]);
-                                DateTime fechaRegistro = Convert.ToDateTime(reader["FechaRegistro"]);
-                                bool activo = Convert.ToBoolean(reader["Activo"]);
-
-                                listaclientes.Add(new Cliente(id, identificacion, nombre, fechaNacimiento, fechaRegistro, activo));
+                            {
+                                Cliente cliente = new Cliente
+                                {
+                                 IdCliente = reader.GetInt32(0),
+                                 Identificacion = reader.GetString(1),
+                                 NombreCompleto = reader.GetString(2),
+                                 FechaNacimiento = reader.GetDateTime(3),
+                                 FechaRegistro = reader.GetDateTime(4),
+                                 Activo = reader.GetBoolean(5)
+                                };
+                                listaclientes.Add(cliente);
                             }
                         }
+                               
                     }
+                        
+                    
                 }
             }
             catch (Exception ex)

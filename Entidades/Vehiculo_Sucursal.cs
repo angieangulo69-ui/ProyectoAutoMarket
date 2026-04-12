@@ -20,16 +20,23 @@ namespace Entidades
 {
     public class Vehiculo_Sucursal
     {
-        public string Sucursal { get; set; }
-        public string  Vehiculo { get; set; }
+        public int IdSucursal { get; set; }
+        public int  IdVehiculo { get; set; }
         public int Cantidad { get; set; }
+        
 
-        public Vehiculo_Sucursal(string sucursal, string vehiculo, int cantidad)
+        public Vehiculo_Sucursal(int idSucursal, int idVehiculo, int cantidad)
         {
-            Sucursal = sucursal;
-            Vehiculo = vehiculo;
+            IdSucursal = idSucursal;
+            IdVehiculo = idVehiculo;
             Cantidad = cantidad;
         }
+
+        public Vehiculo_Sucursal()
+        {
+        }
+
+       
     }
 }
 

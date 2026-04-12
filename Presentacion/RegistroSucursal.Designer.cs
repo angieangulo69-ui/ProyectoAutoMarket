@@ -46,6 +46,12 @@
             label6 = new Label();
             label7 = new Label();
             comboBox_encargado = new ComboBox();
+            ID = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Direccion = new DataGridViewTextBoxColumn();
+            Telefono = new DataGridViewTextBoxColumn();
+            Vendedor = new DataGridViewTextBoxColumn();
+            Activo = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)data_sucursal).BeginInit();
             SuspendLayout();
             // 
@@ -149,6 +155,7 @@
             data_sucursal.BackgroundColor = Color.Black;
             data_sucursal.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             data_sucursal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            data_sucursal.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Direccion, Telefono, Vendedor, Activo });
             data_sucursal.GridColor = SystemColors.HighlightText;
             data_sucursal.Location = new Point(393, 102);
             data_sucursal.Name = "data_sucursal";
@@ -231,6 +238,48 @@
             comboBox_encargado.Size = new Size(205, 28);
             comboBox_encargado.TabIndex = 61;
             // 
+            // ID
+            // 
+            ID.HeaderText = "IdSucursal";
+            ID.MinimumWidth = 6;
+            ID.Name = "ID";
+            ID.Width = 125;
+            // 
+            // Nombre
+            // 
+            Nombre.HeaderText = "Nombre";
+            Nombre.MinimumWidth = 6;
+            Nombre.Name = "Nombre";
+            Nombre.Width = 125;
+            // 
+            // Direccion
+            // 
+            Direccion.HeaderText = "Dirección";
+            Direccion.MinimumWidth = 6;
+            Direccion.Name = "Direccion";
+            Direccion.Width = 125;
+            // 
+            // Telefono
+            // 
+            Telefono.HeaderText = "Teléfono";
+            Telefono.MinimumWidth = 6;
+            Telefono.Name = "Telefono";
+            Telefono.Width = 125;
+            // 
+            // Vendedor
+            // 
+            Vendedor.HeaderText = "Vendedor";
+            Vendedor.MinimumWidth = 6;
+            Vendedor.Name = "Vendedor";
+            Vendedor.Width = 125;
+            // 
+            // Activo
+            // 
+            Activo.HeaderText = "Activo";
+            Activo.MinimumWidth = 6;
+            Activo.Name = "Activo";
+            Activo.Width = 125;
+            // 
             // RegistroSucursal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -282,5 +331,11 @@
         private Label label6;
         private Label label7;
         private ComboBox comboBox_encargado;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Direccion;
+        private DataGridViewTextBoxColumn Telefono;
+        private DataGridViewTextBoxColumn Vendedor;
+        private DataGridViewTextBoxColumn Activo;
     }
 }

@@ -22,26 +22,26 @@ namespace Entidades
         public string Direccion { get; set; }
         public string Telefono { get; set; }
 
-        public int IdVendedorEncargado { get; set; }
-        public Vendedor VendedorEncargado { get; set; }
+        public int IdVendedor { get; set; }
+        public Vendedor Vendedor { get; set; }
 
         public bool Activo { get; set; }
 
-        public Sucursal(int id, string nombre, string direccion, string telefono, Vendedor vendedorEncargado, bool activo)
+        public Sucursal(int id, string nombre, string direccion, string telefono, Vendedor vendedor, bool activo)
         {
             IdSucursal = id;
             Nombre = nombre;
             Direccion = direccion;
             Telefono = telefono;
-            VendedorEncargado = vendedorEncargado;
+            Vendedor = vendedor;
 
-            if (vendedorEncargado != null)
+            if (vendedor != null)
             {
-                IdVendedorEncargado = vendedorEncargado.IdVendedor;
+                IdVendedor = vendedor.IdVendedor;
             }
             else
             {
-                IdVendedorEncargado = 0; // o puedes dejarlo en null si lo cambias a int?
+                IdVendedor = 0; // o puedes dejarlo en null si lo cambias a int?
             }
 
             Activo = activo;

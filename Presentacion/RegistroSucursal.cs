@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
+using Logica;
 
 namespace Presentacion
 {
@@ -28,50 +30,32 @@ namespace Presentacion
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txt_nombre.Text) ||
-                    string.IsNullOrWhiteSpace(txt_direccion.Text))
+                Logica_Sucursal logica = new Logica_Sucursal();
+
+                Sucursal sucursal = new Sucursal
                 {
-                    MessageBox.Show("Complete todos los campos.");
-                    return;
-                }
+                    IdSucursal = logica.ObtenerSiguienteId(),
+                    Nombre = txt_nombre.Text,
+                    Direccion = txt_direccion.Text,
+                    Telefono = mastb_telefono.Text,
+                    IdVendedor = Convert.ToInt32(comboBox_encargado.SelectedValue),
+                    Activo = checkBox_activo.Checked
+                };
 
-                if (!mastb_telefono.MaskCompleted)
+                bool resultado = logica.InsertarSucursal(sucursal);
+
+                if (resultado)
                 {
-                    MessageBox.Show("Teléfono incompleto.");
-                    return;
+                    MessageBox.Show("Sucursal registrada correctamente.");
+                    LimpiarCampos();
+                    CargarGrid_Sucursal();
                 }
-
-                if (comboBox_encargado.SelectedItem == null)
-                {
-                    MessageBox.Show("Seleccione vendedor.");
-                    return;
-                }
-
-                int nuevoId = logica.ObtenerSiguienteID();
-
-                Vendedor vendedorSeleccionado =
-                    (Vendedor)comboBox_encargado.SelectedItem;
-
-                Sucursal nuevaSucursal = new Sucursal(
-                    nuevoId,
-                    txt_nombre.Text,
-                    txt_direccion.Text,
-                    mastb_telefono.Text,
-                    vendedorSeleccionado,
-                    checkBox_activo.Checked
-                );
-
-                logica.registrarSucursal(nuevaSucursal);
-
-                CargarGrid_Sucursal();
-                LimpiarCampos();
-
-                MessageBox.Show("Sucursal registrada correctamente");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
         }
         private void btn_atras_Click(object sender, EventArgs e)
         {
@@ -88,24 +72,25 @@ namespace Presentacion
 
         private void RegistroSucursal_Load(object sender, EventArgs e)
         {
+            
             configurarDataGridView();
-            txt_idsucursal.Text = logica.ObtenerSiguienteID().ToString();
+            txt_idsucursal.Text = logica.ObtenerSiguienteId().ToString();
             CargarVendedores();
             CargarGrid_Sucursal();
 
-            MessageBox.Show(logica.ConsultarSucursal().Count.ToString());
+            
         }
         private void configurarDataGridView()
         {
-            // Configura el DataGridView para mostrar los clientes de manera ordenada
             data_sucursal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            // Ajusta el tamaño de las filas para mostrar todo el contenido
             data_sucursal.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            // Configura el DataGridView para que no se puedan editar las celdas ni agregar filas directamente
             data_sucursal.ReadOnly = true;
             data_sucursal.AllowUserToAddRows = false;
+            data_sucursal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            data_sucursal.MultiSelect = false;
 
-            data_sucursal.AutoGenerateColumns = true;
+            // Usaremos Rows.Add, por eso AutoGenerateColumns = false
+            data_sucursal.AutoGenerateColumns = false;
         }
         private void LimpiarCampos()
 
@@ -116,49 +101,53 @@ namespace Presentacion
             mastb_telefono.Clear();
             comboBox_encargado.SelectedIndex = -1;
             checkBox_activo.Checked = false;
-            txt_idsucursal.Text = logica.ObtenerSiguienteID().ToString(); // Actualiza el ID para la siguiente sucursal
+            txt_idsucursal.Text = logica.ObtenerSiguienteId().ToString(); // Actualiza el ID para la siguiente sucursal
 
         }
         private void CargarVendedores()
         {
-
             try
             {
-                comboBox_encargado.DataSource = logicaVendedor.ConsultarVendedor();
+                var vendedores = logicaVendedor.ConsultarVendedor() ?? new List<Vendedor>();
+                comboBox_encargado.DataSource = null;
+                comboBox_encargado.DataSource = vendedores;
                 comboBox_encargado.DisplayMember = "NombreCompleto";
                 comboBox_encargado.ValueMember = "IdVendedor";
-
+                comboBox_encargado.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando vendedores: " + ex.Message);
+                MessageBox.Show("Error cargando vendedores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void CargarGrid_Sucursal()
         {
+
             try
             {
-                Logica_Sucursal logica = new Logica_Sucursal();
-                var lista = logica.ConsultarSucursal();
-                foreach (var sucursal in lista)
+                var lista = logica.ObtenerSucursales() ?? new List<Sucursal>();
+                data_sucursal.Rows.Clear();
+
+                foreach (var s in lista)
                 {
+                    string vendedor = s.Vendedor != null ? s.Vendedor.NombreCompleto : "SIN VENDEDOR";
+                    string activo = s.Activo ? "Sí" : "No";
+
                     data_sucursal.Rows.Add(
-                        sucursal.IdSucursal,
-                        sucursal.Nombre,
-                        sucursal.Direccion,
-                        sucursal.Telefono,
-                        sucursal.VendedorEncargado != null
-                ? sucursal.VendedorEncargado.NombreCompleto
-                : "SIN VENDEDOR",
-                        sucursal.Activo ? "Sí" : "No");                 
+                        s.IdSucursal,
+                        s.Nombre ?? string.Empty,
+                        s.Direccion ?? string.Empty,
+                        s.Telefono ?? string.Empty,
+                        vendedor,
+                        activo
+                    );
                 }
-            }
+             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar sucursales: " + ex.Message);
             }
         }
-
     }
 }
 

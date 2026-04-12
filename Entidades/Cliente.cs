@@ -42,6 +42,11 @@ namespace Entidades
             FechaRegistro = fechaRegistro;
             Activo = activo;
         }
+
+        public Cliente()
+        {
+        }
+
         //Sobrescribe el método ToString para mostrar el nombre completo y el estado del cliente
         public override string ToString()
         {

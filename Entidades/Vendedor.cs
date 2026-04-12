@@ -26,19 +26,12 @@ namespace Entidades
         public Vendedor(string identificacion, string nombre, DateTime fechaNacimiento, DateTime fechaIngreso, string telefono)
           : base(identificacion, nombre)
         {
-            FechaIngreso = fechaIngreso;
-            Telefono = telefono;
             FechaNacimiento = fechaNacimiento;
+            FechaIngreso = fechaIngreso;
+            Telefono = telefono;    
         }
-            public Vendedor(int idVendedor, string identificacion, string nombre, DateTime fechaNacimiento, DateTime fechaIngreso, string telefono)
-            : base(identificacion, nombre)
-            {
-                IdVendedor = idVendedor;
-                FechaIngreso = fechaIngreso;
-                Telefono = telefono;
-                FechaNacimiento = fechaNacimiento;
-        }
-        public Vendedor():base("","")
+            
+        public Vendedor()
         {
         }
         // Sobrescribe el método ToString para mostrar el nombre completo del vendedor junto con su rol

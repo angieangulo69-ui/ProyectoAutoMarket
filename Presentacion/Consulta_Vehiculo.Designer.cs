@@ -37,12 +37,13 @@
             Column4 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
-            txt_idvehiculo = new TextBox();
             label4 = new Label();
             btn_consultar = new Button();
             btn_salir = new Button();
             label1 = new Label();
             btn_atras = new Button();
+            btn_historial = new Button();
+            comboBox_vehiculos = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)data_vehiculo).BeginInit();
             SuspendLayout();
             // 
@@ -53,11 +54,12 @@
             data_vehiculo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             data_vehiculo.Columns.AddRange(new DataGridViewColumn[] { Column1, Column3, Column2, Column5, Column4, Column6, Column7 });
             data_vehiculo.GridColor = SystemColors.HighlightText;
-            data_vehiculo.Location = new Point(32, 176);
+            data_vehiculo.Location = new Point(57, 176);
             data_vehiculo.Name = "data_vehiculo";
             data_vehiculo.RowHeadersWidth = 51;
-            data_vehiculo.Size = new Size(874, 316);
+            data_vehiculo.Size = new Size(881, 316);
             data_vehiculo.TabIndex = 85;
+            data_vehiculo.CellContentClick += data_vehiculo_CellContentClick;
             // 
             // Column1
             // 
@@ -108,14 +110,6 @@
             Column7.Name = "Column7";
             Column7.Width = 125;
             // 
-            // txt_idvehiculo
-            // 
-            txt_idvehiculo.Location = new Point(218, 104);
-            txt_idvehiculo.Name = "txt_idvehiculo";
-            txt_idvehiculo.ReadOnly = true;
-            txt_idvehiculo.Size = new Size(203, 27);
-            txt_idvehiculo.TabIndex = 84;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -140,6 +134,7 @@
             btn_consultar.Text = "Consultar";
             btn_consultar.TextImageRelation = TextImageRelation.TextBeforeImage;
             btn_consultar.UseVisualStyleBackColor = false;
+            btn_consultar.Click += btn_consultar_Click;
             // 
             // btn_salir
             // 
@@ -151,6 +146,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 81;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label1
             // 
@@ -174,6 +170,29 @@
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 79;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
+            // 
+            // btn_historial
+            // 
+            btn_historial.BackColor = SystemColors.ActiveCaptionText;
+            btn_historial.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_historial.ForeColor = Color.DeepSkyBlue;
+            btn_historial.Location = new Point(605, 94);
+            btn_historial.Name = "btn_historial";
+            btn_historial.Size = new Size(127, 40);
+            btn_historial.TabIndex = 86;
+            btn_historial.Text = "Historial";
+            btn_historial.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btn_historial.UseVisualStyleBackColor = false;
+            btn_historial.Click += btn_historial_Click;
+            // 
+            // comboBox_vehiculos
+            // 
+            comboBox_vehiculos.FormattingEnabled = true;
+            comboBox_vehiculos.Location = new Point(248, 106);
+            comboBox_vehiculos.Name = "comboBox_vehiculos";
+            comboBox_vehiculos.Size = new Size(151, 28);
+            comboBox_vehiculos.TabIndex = 87;
             // 
             // Consulta_Vehiculo
             // 
@@ -182,8 +201,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(965, 580);
+            Controls.Add(comboBox_vehiculos);
+            Controls.Add(btn_historial);
             Controls.Add(data_vehiculo);
-            Controls.Add(txt_idvehiculo);
             Controls.Add(label4);
             Controls.Add(btn_consultar);
             Controls.Add(btn_salir);
@@ -191,6 +211,7 @@
             Controls.Add(btn_atras);
             Name = "Consulta_Vehiculo";
             Text = "Consulta_Vehiculo";
+            Load += Consulta_Vehiculo_Load;
             ((System.ComponentModel.ISupportInitialize)data_vehiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -212,5 +233,7 @@
         private Button btn_salir;
         private Label label1;
         private Button btn_atras;
+        private Button btn_historial;
+        private ComboBox comboBox_vehiculos;
     }
 }

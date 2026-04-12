@@ -1,76 +1,56 @@
-﻿
+﻿using Entidades;
+using Acceso_Datos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica
 {
     public class Logica_Sucursal
     {
-        private Acceso_Datos.Datos_Sucursal datosSucursal = new Acceso_Datos.Datos_Sucursal();
-            public void registrarSucursal(Entidades.Sucursal sucursal)
-            {
-            if (sucursal == null)
-            {
-                throw new Exception("La sucursal no puede ser nula.");
-            }
+        private Datos_Sucursal datosSucursal = new Datos_Sucursal();
 
+        // Insertar con validaciones
+        public bool InsertarSucursal(Sucursal sucursal)
+        {
             if (string.IsNullOrWhiteSpace(sucursal.Nombre))
-            {
-                throw new Exception("El nombre de la sucursal no puede estar vacío.");
-            }
+                throw new Exception("El nombre de la sucursal es obligatorio.");
 
             if (string.IsNullOrWhiteSpace(sucursal.Direccion))
-            {
-                throw new Exception("La dirección de la sucursal no puede estar vacía.");
-            }
+                throw new Exception("La dirección es obligatoria.");
 
             if (string.IsNullOrWhiteSpace(sucursal.Telefono))
-            {
-                throw new Exception("El teléfono de la sucursal no puede estar vacío.");
-            }
+                throw new Exception("El teléfono es obligatorio.");
 
-            if (sucursal.VendedorEncargado == null)
-            {
-                throw new Exception("Debe asignar un vendedor encargado.");
-            }
+            if (sucursal.IdVendedor <= 0)
+                throw new Exception("Debe asignar un vendedor encargado válido.");
 
-            if (sucursal.IdVendedorEncargado <= 0)
-            {
-                throw new Exception("Debe seleccionar un vendedor válido.");
-            }
-
-            var listaSucursales = datosSucursal.ObtenerSucursales();
-
-            if (listaSucursales.Count >= 5)
-            {
+            // Regla: máximo 5 sucursales
+            var lista = datosSucursal.ObtenerSucursales();
+            if (lista.Count >= 5)
                 throw new Exception("No se pueden registrar más de 5 sucursales.");
-            }
 
-            datosSucursal.InsertarSucursal(sucursal);
-
+            return datosSucursal.InsertarSucursal(sucursal);
         }
 
-             // Método para actualizar una sucursal existente
-             public int ObtenerSiguienteID() 
-            {
-              return datosSucursal.ObtenerSiguienteID();
-             }
-        // Método para obtener la lista de sucursales
-        public List<Entidades.Sucursal> ConsultarSucursal()
-         {
-            try
-            {
-                return datosSucursal.ObtenerSucursales();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al consultar las sucursales: " + ex.Message);
-            }
-
+        // Obtener todas las sucursales
+        public List<Sucursal> ObtenerSucursales()
+        {
+            return datosSucursal.ObtenerSucursales();
         }
 
+        // Obtener una sucursal por ID
+        public Sucursal ObtenerPorId(int idSucursal)
+        {
+            if (idSucursal <= 0)
+                throw new Exception("El ID de la sucursal no es válido.");
+
+            return datosSucursal.ObtenerPorId(idSucursal);
+        }
+
+        // Obtener siguiente ID
+        public int ObtenerSiguienteId()
+        {
+            return datosSucursal.ObtenerSiguienteId();
+        }
     }
 }

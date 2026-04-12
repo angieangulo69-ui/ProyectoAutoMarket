@@ -102,9 +102,7 @@ namespace Presentacion
                 foreach (var cliente in listaClientes)
                 {
                     data_clientes.Rows.Add(cliente.IdCliente, cliente.Identificacion, cliente.NombreCompleto, cliente.FechaNacimiento.ToShortDateString(), cliente.FechaRegistro.ToShortDateString(), cliente.Activo ? "Sí" : "No");
-                }
-
-                //data_clientes.DataSource = logica.ConsultarCliente(); // Cargar los clientes en el DataGridView
+                }                
             }
             catch (Exception ex)
             {

@@ -11,34 +11,40 @@ namespace Acceso_Datos
     public class Datos_Vendedor
     {
         private Conexion conexion = new Conexion();
-        public void InsertarVendedor(Vendedor vendedor)
+        public bool InsertarVendedor(Vendedor vendedor)
         {
-            try
-            {
+            
+            
                 using (var conn = conexion.ObtenerConexion())
                 {
                     conn.Open();
                     string query = "INSERT INTO Vendedor (IdVendedor,Identificacion, NombreCompleto, FechaNacimiento, FechaIngreso, Telefono) " +
                                    "VALUES (@IdVendedor,@Identificacion, @NombreCompleto, @FechaNacimiento, @FechaIngreso, @Telefono)";
                     // Se utiliza un comando SQL parametrizado para evitar inyecciones SQL y asegurar la integridad de los datos.
-                    using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
+                    using (var comando = new System.Data.SqlClient.SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@IdVendedor", vendedor.IdVendedor);
-                        cmd.Parameters.AddWithValue("@Identificacion", vendedor.Identificacion);
-                        cmd.Parameters.AddWithValue("@NombreCompleto", vendedor.NombreCompleto);
-                        cmd.Parameters.AddWithValue("@FechaNacimiento", vendedor.FechaNacimiento);
-                        cmd.Parameters.AddWithValue("@FechaIngreso", vendedor.FechaIngreso);
-                        cmd.Parameters.AddWithValue("@Telefono", vendedor.Telefono);
+                        comando.Parameters.AddWithValue("@IdVendedor", vendedor.IdVendedor);
+                        comando.Parameters.AddWithValue("@Identificacion", vendedor.Identificacion);
+                        comando.Parameters.AddWithValue("@NombreCompleto", vendedor.NombreCompleto);
+                        comando.Parameters.AddWithValue("@FechaNacimiento", vendedor.FechaNacimiento);
+                        comando.Parameters.AddWithValue("@FechaIngreso", vendedor.FechaIngreso);
+                        comando.Parameters.AddWithValue("@Telefono", vendedor.Telefono);
 
-                        cmd.ExecuteNonQuery();
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        if (filasAfectadas == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception("No se pudo insertar la categoría de vehículo.");
+                            return false;
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al insertar vendedor: " + ex.Message);
-            }
-        }
+           
+        
         public List<Vendedor> ObtenerVendedor()
         {
             List<Vendedor> listavendedor = new List<Vendedor>();
@@ -47,22 +53,24 @@ namespace Acceso_Datos
                 using (var conn = conexion.ObtenerConexion())
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Vendedor";
+                    string query = "SELECT IdVendedor, Identificacion, NombreCompleto, FechaNacimiento, FechaIngreso, Telefono FROM Vendedor";
 
-                    using (var cmd = new System.Data.SqlClient.SqlCommand(query, conn))
+                    using (SqlCommand comando = new SqlCommand(query, conn))
                     {
-                        using (var reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = comando.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                int id = Convert.ToInt32(reader["IdVendedor"]);
-                                string identificacion = reader["Identificacion"].ToString();
-                                string nombre = reader["NombreCompleto"].ToString();
-                                DateTime fechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]);
-                                DateTime fechaIngreso = Convert.ToDateTime(reader["FechaIngreso"]);
-                                string telefono = reader["Telefono"].ToString();
-
-                                listavendedor.Add(new Vendedor(id, identificacion, nombre, fechaNacimiento, fechaIngreso, telefono));
+                                Vendedor vendedor = new Vendedor
+                                {
+                                    IdVendedor = reader.GetInt32(0),
+                                    Identificacion = reader.GetString(1),
+                                    NombreCompleto = reader.GetString(2),
+                                    FechaNacimiento = reader.GetDateTime(3),
+                                    FechaIngreso = reader.GetDateTime(4),
+                                    Telefono = reader.GetString(5)
+                                };
+                                listavendedor.Add(vendedor);
                             }
                         }
                     }

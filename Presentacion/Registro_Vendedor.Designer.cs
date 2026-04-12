@@ -41,18 +41,18 @@
             label4 = new Label();
             btn_registrar = new Button();
             label1 = new Label();
-            data_clientes = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
             btn_salir = new Button();
             btn_atras = new Button();
             label2 = new Label();
             mask_telefono = new MaskedTextBox();
-            ((System.ComponentModel.ISupportInitialize)data_clientes).BeginInit();
+            data_vendedor = new DataGridView();
+            ID = new DataGridViewTextBoxColumn();
+            Identificacion = new DataGridViewTextBoxColumn();
+            NombreCompleto = new DataGridViewTextBoxColumn();
+            FechaNacimiento = new DataGridViewTextBoxColumn();
+            FechaIngreso = new DataGridViewTextBoxColumn();
+            Telefono = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)data_vendedor).BeginInit();
             SuspendLayout();
             // 
             // dateTimeNacimiento
@@ -178,61 +178,6 @@
             label1.TabIndex = 41;
             label1.Text = "Registro de Vendedores";
             // 
-            // data_clientes
-            // 
-            data_clientes.BackgroundColor = Color.Black;
-            data_clientes.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            data_clientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            data_clientes.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column5, Column4, Column6 });
-            data_clientes.GridColor = SystemColors.HighlightText;
-            data_clientes.Location = new Point(382, 105);
-            data_clientes.Name = "data_clientes";
-            data_clientes.RowHeadersWidth = 51;
-            data_clientes.Size = new Size(761, 316);
-            data_clientes.TabIndex = 57;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Id Vendedor";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Identificación";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Nombre";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Nacimiento";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Ingreso";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Teléfono";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
-            // 
             // btn_salir
             // 
             btn_salir.BackColor = Color.Black;
@@ -277,6 +222,61 @@
             mask_telefono.Size = new Size(172, 27);
             mask_telefono.TabIndex = 60;
             // 
+            // data_vendedor
+            // 
+            data_vendedor.BackgroundColor = Color.Black;
+            data_vendedor.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            data_vendedor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            data_vendedor.Columns.AddRange(new DataGridViewColumn[] { ID, Identificacion, NombreCompleto, FechaNacimiento, FechaIngreso, Telefono });
+            data_vendedor.GridColor = SystemColors.HighlightText;
+            data_vendedor.Location = new Point(382, 105);
+            data_vendedor.Name = "data_vendedor";
+            data_vendedor.RowHeadersWidth = 51;
+            data_vendedor.Size = new Size(814, 316);
+            data_vendedor.TabIndex = 57;
+            // 
+            // ID
+            // 
+            ID.HeaderText = "Id Vendedor";
+            ID.MinimumWidth = 6;
+            ID.Name = "ID";
+            ID.Width = 125;
+            // 
+            // Identificacion
+            // 
+            Identificacion.HeaderText = "Identificación";
+            Identificacion.MinimumWidth = 6;
+            Identificacion.Name = "Identificacion";
+            Identificacion.Width = 125;
+            // 
+            // NombreCompleto
+            // 
+            NombreCompleto.HeaderText = "Nombre";
+            NombreCompleto.MinimumWidth = 6;
+            NombreCompleto.Name = "NombreCompleto";
+            NombreCompleto.Width = 125;
+            // 
+            // FechaNacimiento
+            // 
+            FechaNacimiento.HeaderText = "Fecha Nacimiento";
+            FechaNacimiento.MinimumWidth = 6;
+            FechaNacimiento.Name = "FechaNacimiento";
+            FechaNacimiento.Width = 125;
+            // 
+            // FechaIngreso
+            // 
+            FechaIngreso.HeaderText = "Fecha Ingreso";
+            FechaIngreso.MinimumWidth = 6;
+            FechaIngreso.Name = "FechaIngreso";
+            FechaIngreso.Width = 125;
+            // 
+            // Telefono
+            // 
+            Telefono.HeaderText = "Teléfono";
+            Telefono.MinimumWidth = 6;
+            Telefono.Name = "Telefono";
+            Telefono.Width = 125;
+            // 
             // Registro_Vendedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -286,7 +286,7 @@
             ClientSize = new Size(1217, 585);
             Controls.Add(mask_telefono);
             Controls.Add(label2);
-            Controls.Add(data_clientes);
+            Controls.Add(data_vendedor);
             Controls.Add(btn_salir);
             Controls.Add(btn_atras);
             Controls.Add(dateTimeNacimiento);
@@ -304,7 +304,7 @@
             Name = "Registro_Vendedor";
             Text = "Registro_Vendedor";
             Load += Registro_Vendedor_Load;
-            ((System.ComponentModel.ISupportInitialize)data_clientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)data_vendedor).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -322,16 +322,16 @@
         private Label label4;
         private Button btn_registrar;
         private Label label1;
-        private DataGridView data_clientes;
         private Button btn_salir;
         private Button btn_atras;
         private Label label2;
         private MaskedTextBox mask_telefono;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
+        private DataGridView data_vendedor;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn Identificacion;
+        private DataGridViewTextBoxColumn NombreCompleto;
+        private DataGridViewTextBoxColumn FechaNacimiento;
+        private DataGridViewTextBoxColumn FechaIngreso;
+        private DataGridViewTextBoxColumn Telefono;
     }
 }

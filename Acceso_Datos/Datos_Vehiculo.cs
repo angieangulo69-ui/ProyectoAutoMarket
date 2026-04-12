@@ -13,8 +13,8 @@ namespace Acceso_Datos
     {
         private Conexion conexion = new Conexion();
 
-        // 🔥 INSERTAR VEHÍCULO
-        public void InsertarVehiculo(Vehiculo vehiculo)
+        // 
+        public bool InsertarVehiculo(Vehiculo vehiculo)
         {
             try
             {
@@ -22,35 +22,40 @@ namespace Acceso_Datos
                 {
                     conn.Open();
 
-                    string query = @"INSERT INTO Vehiculo 
-                                    (IdVehiculo, Marca, Modelo, Ano, Precio, IdCategoria, Estado) 
-                                    VALUES 
-                                    (@IdVehiculo, @Marca, @Modelo, @Ano, @Precio, @IdCategoria, @Estado)";
+                    string query = @"INSERT INTO Vehiculo (IdVehiculo, Marca, Modelo, Ano, Precio, IdCategoria, Estado) 
+                                    VALUES  (@IdVehiculo, @Marca, @Modelo, @Ano, @Precio, @IdCategoria, @Estado)";
 
-                    using (var cmd = new SqlCommand(query, conn))
+                    using (var comando = new System.Data.SqlClient.SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@IdVehiculo", vehiculo.IdVehiculo);
-                        cmd.Parameters.AddWithValue("@Marca", vehiculo.Marca);
-                        cmd.Parameters.AddWithValue("@Modelo", vehiculo.Modelo);
-                        cmd.Parameters.AddWithValue("@Ano", vehiculo.Ano);
-                        cmd.Parameters.AddWithValue("@Precio", vehiculo.Precio);
+                        comando.Parameters.AddWithValue("@IdVehiculo", vehiculo.IdVehiculo);
+                        comando.Parameters.AddWithValue("@Marca", vehiculo.Marca);
+                        comando.Parameters.AddWithValue("@Modelo", vehiculo.Modelo);
+                        comando.Parameters.AddWithValue("@Ano", vehiculo.Ano);
+                        comando.Parameters.AddWithValue("@Precio", vehiculo.Precio);                       
+                        comando.Parameters.AddWithValue("@IdCategoria", vehiculo.IdCategoria);
+                        comando.Parameters.AddWithValue("@Estado", vehiculo.Estado);
 
-                        // 🔥 CORREGIDO (ANTES ESTABA MAL)
-                        cmd.Parameters.AddWithValue("@IdCategoria", vehiculo.IdCategoria);
-
-                        cmd.Parameters.AddWithValue("@Estado", vehiculo.Estado);
-
-                        cmd.ExecuteNonQuery();
+                        int filasafectadas = comando.ExecuteNonQuery();
+                        if (filasafectadas == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception("No se pudo insertar el vehículo.");
+                            return false;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al insertar vehículo: " + ex.Message);
+                return false;
             }
         }
 
-        // 🔥 OBTENER VEHÍCULOS (CON JOIN)
+        // 
         public List<Vehiculo> ObtenerVehiculo()
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -61,39 +66,34 @@ namespace Acceso_Datos
                 {
                     conn.Open();
 
-                    string query = @"SELECT v.IdVehiculo, v.Marca, v.Modelo, v.Ano, v.Precio,
-                                           v.IdCategoria,
-                                           c.NombreCategoria,
-                                           c.Descripcion,
-                                           v.Estado
-                                    FROM Vehiculo v
-                                    INNER JOIN CategoriaVehiculo c 
-                                    ON v.IdCategoria = c.IdCategoria";
+                    string query = @"SELECT v.IdVehiculo, v.Marca, v.Modelo, v.Ano, v.Precio, v.IdCategoria,c.NombreCategoria,c.Descripcion, v.Estado 
+                                     FROM Vehiculo v INNER JOIN CategoriaVehiculo c  ON v.IdCategoria = c.IdCategoria";
 
-                    using (var cmd = new SqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
+                    using (SqlCommand comando = new SqlCommand(query, conn))
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Vehiculo v = new Vehiculo
+                            Vehiculo vehiculo = new Vehiculo
                             {
-                                IdVehiculo = Convert.ToInt32(reader["IdVehiculo"]),
-                                Marca = reader["Marca"].ToString(),
-                                Modelo = reader["Modelo"].ToString(),
-                                Ano = Convert.ToInt32(reader["Ano"]),
-                                Precio = Convert.ToDecimal(reader["Precio"]),
-                                IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
-                                Estado = Convert.ToChar(reader["Estado"]),
+                                IdVehiculo = reader.GetInt32(0),
+                                Marca = reader.GetString(1),
+                                Modelo = reader.GetString(2),
+                                Ano = reader.GetInt32(3),
+                                Precio = reader.GetDecimal(4),
+                                IdCategoria = reader.GetInt32(5),
+                                Estado = reader.GetString(8)[0],
 
-                                // 🔥 RELACIÓN CON CATEGORÍA (PRO)
+                                // 
                                 Categoria = new CategoriaVehiculo(
-                                    Convert.ToInt32(reader["IdCategoria"]),
-                                    reader["NombreCategoria"].ToString(),
-                                    reader["Descripcion"].ToString()
+                                    reader.GetInt32(5),
+                                    reader.GetString(6),
+                                    reader.GetString(7)
                                 )
                             };
 
-                            listaVehiculos.Add(v);
+                            listaVehiculos.Add(vehiculo);
                         }
                     }
                 }
@@ -105,8 +105,59 @@ namespace Acceso_Datos
 
             return listaVehiculos;
         }
+        public Vehiculo ObtenerPorId(int idVehiculo)
+        {
+            Vehiculo vehiculo = null;
 
-        //  OBTENER SIGUIENTE ID
+            try
+            {
+                using (var conn = conexion.ObtenerConexion())
+                {
+                    conn.Open();
+
+                    string query = @"SELECT v.IdVehiculo, v.Marca, v.Modelo, v.Ano, v.Precio, 
+                                    v.IdCategoria, c.NombreCategoria, c.Descripcion, v.Estado 
+                             FROM Vehiculo v 
+                             INNER JOIN CategoriaVehiculo c ON v.IdCategoria = c.IdCategoria
+                             WHERE v.IdVehiculo = @Id";
+
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", idVehiculo);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                vehiculo = new Vehiculo
+                                {
+                                    IdVehiculo = reader.GetInt32(0),
+                                    Marca = reader.GetString(1),
+                                    Modelo = reader.GetString(2),
+                                    Ano = reader.GetInt32(3),
+                                    Precio = reader.GetDecimal(4),
+                                    IdCategoria = reader.GetInt32(5),
+                                    Estado = reader.GetString(8)[0],
+
+                                    Categoria = new CategoriaVehiculo(
+                                        reader.GetInt32(5),
+                                        reader.GetString(6),
+                                        reader.GetString(7)
+                                    )
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener vehículo: " + ex.Message);
+            }
+            return vehiculo;
+        }
+
+        //  
         public int ObtenerSiguienteId()
         {
             int siguienteId = 1;

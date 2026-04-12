@@ -38,10 +38,11 @@
             Column6 = new DataGridViewTextBoxColumn();
             btn_salir = new Button();
             btn_atras = new Button();
-            txt_idvendedor = new TextBox();
             label4 = new Label();
             btn_registrar = new Button();
             label1 = new Label();
+            btn_historial = new Button();
+            comboBoxvendedor = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)data_clientes).BeginInit();
             SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             data_clientes.RowHeadersWidth = 51;
             data_clientes.Size = new Size(761, 316);
             data_clientes.TabIndex = 64;
+            data_clientes.CellContentClick += data_clientes_CellContentClick;
             // 
             // Column1
             // 
@@ -110,6 +112,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 63;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // btn_atras
             // 
@@ -121,14 +124,7 @@
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 62;
             btn_atras.UseVisualStyleBackColor = false;
-            // 
-            // txt_idvendedor
-            // 
-            txt_idvendedor.Location = new Point(244, 104);
-            txt_idvendedor.Name = "txt_idvendedor";
-            txt_idvendedor.ReadOnly = true;
-            txt_idvendedor.Size = new Size(172, 27);
-            txt_idvendedor.TabIndex = 61;
+            btn_atras.Click += btn_atras_Click;
             // 
             // label4
             // 
@@ -154,6 +150,7 @@
             btn_registrar.Text = "Consultar";
             btn_registrar.TextImageRelation = TextImageRelation.TextBeforeImage;
             btn_registrar.UseVisualStyleBackColor = false;
+            btn_registrar.Click += btn_registrar_Click;
             // 
             // label1
             // 
@@ -167,6 +164,28 @@
             label1.TabIndex = 58;
             label1.Text = "Consulta de Vendedores";
             // 
+            // btn_historial
+            // 
+            btn_historial.BackColor = SystemColors.ActiveCaptionText;
+            btn_historial.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_historial.ForeColor = Color.DeepSkyBlue;
+            btn_historial.Location = new Point(578, 91);
+            btn_historial.Name = "btn_historial";
+            btn_historial.Size = new Size(127, 40);
+            btn_historial.TabIndex = 65;
+            btn_historial.Text = "Historial";
+            btn_historial.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btn_historial.UseVisualStyleBackColor = false;
+            btn_historial.Click += btn_historial_Click;
+            // 
+            // comboBoxvendedor
+            // 
+            comboBoxvendedor.FormattingEnabled = true;
+            comboBoxvendedor.Location = new Point(254, 106);
+            comboBoxvendedor.Name = "comboBoxvendedor";
+            comboBoxvendedor.Size = new Size(151, 28);
+            comboBoxvendedor.TabIndex = 66;
+            // 
             // Consulta_Vendedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -174,15 +193,17 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1023, 553);
+            Controls.Add(comboBoxvendedor);
+            Controls.Add(btn_historial);
             Controls.Add(data_clientes);
             Controls.Add(btn_salir);
             Controls.Add(btn_atras);
-            Controls.Add(txt_idvendedor);
             Controls.Add(label4);
             Controls.Add(btn_registrar);
             Controls.Add(label1);
             Name = "Consulta_Vendedor";
             Text = "Consulta_Vendedor";
+            Load += Consulta_Vendedor_Load;
             ((System.ComponentModel.ISupportInitialize)data_clientes).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -199,9 +220,10 @@
         private DataGridViewTextBoxColumn Column6;
         private Button btn_salir;
         private Button btn_atras;
-        private TextBox txt_idvendedor;
         private Label label4;
         private Button btn_registrar;
         private Label label1;
+        private Button btn_historial;
+        private ComboBox comboBoxvendedor;
     }
 }

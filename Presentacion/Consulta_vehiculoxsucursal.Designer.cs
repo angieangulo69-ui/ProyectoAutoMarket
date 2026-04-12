@@ -40,6 +40,7 @@
             Nombre = new DataGridViewTextBoxColumn();
             Vehiculo = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
+            btn_historial = new Button();
             ((System.ComponentModel.ISupportInitialize)data_sucursalxVehiculo).BeginInit();
             SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             comboBox_idsucursal.Name = "comboBox_idsucursal";
             comboBox_idsucursal.Size = new Size(151, 28);
             comboBox_idsucursal.TabIndex = 96;
+            comboBox_idsucursal.SelectedIndexChanged += comboBox_idsucursal_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -86,6 +88,7 @@
             btn_salir.Size = new Size(43, 44);
             btn_salir.TabIndex = 91;
             btn_salir.UseVisualStyleBackColor = false;
+            btn_salir.Click += btn_salir_Click;
             // 
             // label1
             // 
@@ -104,11 +107,12 @@
             btn_atras.BackColor = Color.Black;
             btn_atras.BackgroundImage = (Image)resources.GetObject("btn_atras.BackgroundImage");
             btn_atras.BackgroundImageLayout = ImageLayout.Stretch;
-            btn_atras.Location = new Point(-1, 491);
+            btn_atras.Location = new Point(12, 502);
             btn_atras.Name = "btn_atras";
             btn_atras.Size = new Size(43, 44);
             btn_atras.TabIndex = 89;
             btn_atras.UseVisualStyleBackColor = false;
+            btn_atras.Click += btn_atras_Click;
             // 
             // data_sucursalxVehiculo
             // 
@@ -117,11 +121,12 @@
             data_sucursalxVehiculo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             data_sucursalxVehiculo.Columns.AddRange(new DataGridViewColumn[] { IdSucursal, Nombre, Vehiculo, Cantidad });
             data_sucursalxVehiculo.GridColor = SystemColors.HighlightText;
-            data_sucursalxVehiculo.Location = new Point(181, 203);
+            data_sucursalxVehiculo.Location = new Point(153, 227);
             data_sucursalxVehiculo.Name = "data_sucursalxVehiculo";
             data_sucursalxVehiculo.RowHeadersWidth = 51;
-            data_sucursalxVehiculo.Size = new Size(554, 316);
+            data_sucursalxVehiculo.Size = new Size(554, 289);
             data_sucursalxVehiculo.TabIndex = 88;
+            data_sucursalxVehiculo.CellContentClick += data_sucursalxVehiculo_CellContentClick;
             // 
             // IdSucursal
             // 
@@ -151,6 +156,20 @@
             Cantidad.Name = "Cantidad";
             Cantidad.Width = 125;
             // 
+            // btn_historial
+            // 
+            btn_historial.BackColor = SystemColors.ActiveCaptionText;
+            btn_historial.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_historial.ForeColor = Color.DeepSkyBlue;
+            btn_historial.Location = new Point(519, 119);
+            btn_historial.Name = "btn_historial";
+            btn_historial.Size = new Size(131, 45);
+            btn_historial.TabIndex = 97;
+            btn_historial.Text = "Historial";
+            btn_historial.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btn_historial.UseVisualStyleBackColor = false;
+            btn_historial.Click += btn_historial_Click;
+            // 
             // Consulta_vehiculoxsucursal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -158,6 +177,7 @@
             BackColor = SystemColors.ControlDark;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(891, 564);
+            Controls.Add(btn_historial);
             Controls.Add(comboBox_idsucursal);
             Controls.Add(label4);
             Controls.Add(btn_consultar);
@@ -167,6 +187,7 @@
             Controls.Add(data_sucursalxVehiculo);
             Name = "Consulta_vehiculoxsucursal";
             Text = "Consulta_vehiculoxsucursal";
+            Load += Consulta_vehiculoxsucursal_Load;
             ((System.ComponentModel.ISupportInitialize)data_sucursalxVehiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -184,5 +205,6 @@
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Vehiculo;
         private DataGridViewTextBoxColumn Cantidad;
+        private Button btn_historial;
     }
 }

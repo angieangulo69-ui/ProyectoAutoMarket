@@ -16,34 +16,34 @@ namespace Acceso_Datos
         private Conexion conexion = new Conexion();
         // Método para insertar una nueva categoría de vehículo en la base de datos
         public bool InsertarCategoria(CategoriaVehiculo categoria)
-        {           
-               //using se usa para asegurar que la conexión se
-                //cierre correctamente después de su uso, incluso si ocurre una excepción
-                using (var conn = conexion.ObtenerConexion())
+        {
+            //using se usa para asegurar que la conexión se
+            //cierre correctamente después de su uso, incluso si ocurre una excepción
+            using (var conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                //query 
+                string query = "INSERT INTO CategoriaVehiculo (IdCategoria,NombreCategoria,Descripcion) VALUES (@Id,@Nombre,@Descripcion)";
+                // Ejecutar la consulta SQL para insertar la nueva categoría de vehículo
+                using (var comando = new System.Data.SqlClient.SqlCommand(query, conn))
                 {
-                    conn.Open();
-                    //query 
-                    string query = "INSERT INTO CategoriaVehiculo (IdCategoria,NombreCategoria,Descripcion) VALUES (@Id,@Nombre,@Descripcion)";
-                    // Ejecutar la consulta SQL para insertar la nueva categoría de vehículo
-                    using (var comando = new System.Data.SqlClient.SqlCommand(query, conn))
+                    comando.Parameters.AddWithValue("@Id", categoria.IdCategoria);
+                    comando.Parameters.AddWithValue("@Nombre", categoria.NombreCategoria);
+                    comando.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
+                    //verifica si se insertó correctamente la
+                    //categoría de vehículo, si no se afectó ninguna fila, lanza una excepción
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    if (filasAfectadas == 1)
                     {
-                        comando.Parameters.AddWithValue("@Id", categoria.IdCategoria);
-                        comando.Parameters.AddWithValue("@Nombre", categoria.NombreCategoria);
-                        comando.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
-                        //verifica si se insertó correctamente la
-                        //categoría de vehículo, si no se afectó ninguna fila, lanza una excepción
-                        int filasAfectadas = comando.ExecuteNonQuery();
-                        if (filasAfectadas == 1)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            throw new Exception("No se pudo insertar la categoría de vehículo.");
-                            return false;
-                        }
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo insertar la categoría de vehículo.");
+
                     }
                 }
+            }
         }
 
         // Método para obtener todas las categorías de vehículos desde la base de datos
@@ -51,7 +51,7 @@ namespace Acceso_Datos
         {
             List<CategoriaVehiculo> listacategorias = new List<CategoriaVehiculo>();
             try
-            {              
+            {
                 using (var conn = conexion.ObtenerConexion())
                 {
                     conn.Open();// Consulta SQL para seleccionar todas las categorías de vehículos
@@ -59,7 +59,7 @@ namespace Acceso_Datos
                     // Ejecutar la consulta y leer los resultados
                     using (SqlCommand comando = new SqlCommand(query, conn))
                     {
-                        using (SqlDataReader reader =comando.ExecuteReader()) // Leer cada fila devuelta por la consulta
+                        using (SqlDataReader reader = comando.ExecuteReader()) // Leer cada fila devuelta por la consulta
                         {
                             while (reader.Read())
                             {
@@ -101,7 +101,15 @@ namespace Acceso_Datos
 
             return siguienteId;
         }
+        public int ContarCategorias()
+        {
+            const string sql = "SELECT COUNT(*) FROM CategoriaVehiculo";
+            using (var conn = conexion.ObtenerConexion())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                conn.Open();
+                return (int)cmd.ExecuteScalar();
+            }
+        }
     }
 }
-    
-
